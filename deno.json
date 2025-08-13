@@ -1,4 +1,13 @@
 {
+    "compilerOptions": {
+        "lib": [
+            "deno.window",
+            "deno.ns",
+            "dom.iterable",
+            "ESNext",
+            "DOM"
+        ]
+    },
     "workspace": [
         "./packages/command",
         "./packages/inject",
