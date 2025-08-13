@@ -15,7 +15,7 @@
         "dev": "tsup --watch",
         "test": "deno test",
         "lint": "deno lint",
-        "test:coverage": "deno test --coverage=cov_profile && deno coverage --html cov_profile deno coverage --lcov --output=./coverage/lcov.info",
+        "test:coverage": "deno test --coverage=cov_profile && deno coverage --html cov_profile && deno coverage --lcov --output=./coverage/lcov.info",
         "publish:npm": "npm publish --provenance --access public",
         "publish:jsr": "npx jsr publish",
         "publish": "npm run publish:npm && npm run publish:jsr"
