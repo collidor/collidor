@@ -1,7 +1,6 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@collidor/event@^4.1.2": "4.1.2",
     "jsr:@collidor/injector@2": "2.1.1",
     "jsr:@std/assert@*": "1.0.12",
     "jsr:@std/assert@1": "1.0.12",
@@ -21,9 +20,6 @@
     "npm:typescript@^5.7.3": "5.8.3"
   },
   "jsr": {
-    "@collidor/event@4.1.2": {
-      "integrity": "cbd82bb6a65dc6a4d9bf925f1fb0ed36104971ded81a547a95ab2340df161345"
-    },
     "@collidor/injector@2.1.1": {
       "integrity": "307738ea56eda98e1dc061c782b82bf38b11912f0fd41923718ffef73decd768"
     },
@@ -749,16 +745,21 @@
     }
   },
   "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:turbo@^2.5.5"
+      ]
+    },
     "members": {
       "packages/command": {
         "dependencies": [
-          "jsr:@collidor/event@^4.1.2",
+          "jsr:@collidor/event@^4.2.0",
           "jsr:@std/assert@^1.0.11",
           "jsr:@std/testing@^1.0.9"
         ],
         "packageJson": {
           "dependencies": [
-            "npm:@collidor/event@4.1.2",
+            "npm:@collidor/event@4.2.0",
             "npm:tsup@8.5.0",
             "npm:typescript@5.8.3"
           ]
