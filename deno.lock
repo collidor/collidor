@@ -759,7 +759,6 @@
         ],
         "packageJson": {
           "dependencies": [
-            "npm:@collidor/event@4.2.0",
             "npm:tsup@8.5.0",
             "npm:typescript@5.8.3"
           ]
