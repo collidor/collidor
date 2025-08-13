@@ -1,0 +1,45 @@
+{
+    "name": "@collidor/command",
+    "version": "5.2.4",
+    "license": "MIT",
+    "exports": "./src/main.ts",
+    "compilerOptions": {
+        "lib": [
+            "deno.window",
+            "deno.ns",
+            "dom.iterable",
+            "ESNext",
+            "DOM"
+        ]
+    },
+    "publish": {
+        "include": [
+            "./src/**/*",
+            "README.md",
+            "deno.json",
+            "deno.lock",
+            "LICENSE"
+        ],
+        "exclude": [
+            "dist"
+        ]
+    },
+    "tasks": {
+        "dev": "deno run --watch ./src/main.ts"
+    },
+    "imports": {
+        "@std/assert": "jsr:@std/assert@^1.0.11",
+        "@std/testing": "jsr:@std/testing@^1.0.9",
+        "@collidor/event": "jsr:@collidor/event@^4.1.2"
+    },
+    "lint": {
+        "rules": {
+            "exclude": [
+                "no-explicit-any"
+            ],
+            "include": [
+                "no-console"
+            ]
+        }
+    }
+}

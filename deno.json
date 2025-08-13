@@ -1,0 +1,7 @@
+{
+    "workspace": [
+        "./packages/command",
+        "./packages/inject",
+        "./packages/event"
+    ]
+}

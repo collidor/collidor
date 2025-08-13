@@ -1,0 +1,37 @@
+{
+    "name": "@collidor/event",
+    "version": "4.1.2",
+    "description": "A small library to create, register and listen to events.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/collidor/event"
+    },
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": "./dist/main.d.ts",
+            "import": "./dist/main.js",
+            "require": "./dist/main.cjs"
+        }
+    },
+    "scripts": {
+        "test": "deno test",
+        "test:coverage": "deno eval \"await Deno.remove('./cov_profile', { recursive: true })\" && deno test --coverage=cov_profile && deno coverage --html cov_profile",
+        "build": "tsup",
+        "dev": "tsup --watch"
+    },
+    "keywords": [
+        "event",
+        "event bus",
+        "event handler",
+        "event emitter",
+        "event listener",
+        "event publisher"
+    ],
+    "author": "Alykam Burdzaki <alykam@gmail.com> (https://alykam.com)",
+    "license": "MIT",
+    "devDependencies": {
+        "tsup": "^8.3.6",
+        "typescript": "^5.7.3"
+    }
+}

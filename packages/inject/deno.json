@@ -1,0 +1,31 @@
+{
+    "name": "@collidor/injector",
+    "version": "2.3.0",
+    "license": "MIT",
+    "exports": "./src/main.ts",
+    "publish": {
+        "include": [
+            "./src/**/*",
+            "README.md",
+            "deno.json",
+            "deno.lock",
+            "LICENSE"
+        ],
+        "exclude": [
+            "dist"
+        ]
+    },
+    "tasks": {
+        "dev": "deno run --watch main.mjs"
+    },
+    "imports": {
+        "@std/assert": "jsr:@std/assert@1"
+    },
+    "lint": {
+        "rules": {
+            "exclude": [
+                "no-explicit-any"
+            ]
+        }
+    }
+}
