@@ -18,7 +18,7 @@
         "test:coverage": "deno test --coverage && deno coverage --lcov --output=./coverage/lcov.info && deno coverage --html",
         "publish:npm": "NPM_CONFIG_PROVENANCE=true pnpm publish --access public",
         "publish:jsr": "npx jsr publish",
-        "publish-package": "npm ci && npm run publish:npm && npm run publish:jsr"
+        "publish-package": "npm run publish:npm && npm run publish:jsr"
     },
     "keywords": [
         "command",
