@@ -1,10 +1,10 @@
 {
     "name": "@collidor/command",
-    "version": "5.2.4",
+    "version": "5.3.0",
     "description": "A small library to create, register and execute commands.",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/collidor/command.git"
+        "url": "git+https://github.com/collidor/collidor.git"
     },
     "type": "module",
     "main": "dist/main.cjs",
