@@ -50,4 +50,4 @@ jobs:
           auth-token: ${{ secrets.NPM_TOKEN }}
       - run: pnpm i
       - name: Publish package
-        run: pnpm turbo publish
+        run: pnpm publish --access public --provenance
