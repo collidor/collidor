@@ -43,6 +43,9 @@
             "outputs": [
                 "dist/**",
                 "coverage/**"
+            ],
+            "env": [
+                "NPM_TOKEN"
             ]
         }
     }
