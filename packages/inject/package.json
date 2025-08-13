@@ -18,7 +18,7 @@
         "test:coverage": "deno test --coverage && deno coverage --lcov --output=./coverage/lcov.info && deno coverage --html",
         "publish:npm": "npm publish --provenance --access public",
         "publish:jsr": "npx jsr publish",
-        "publish": "npm run publish:npm && npm run publish:jsr"
+        "publish-package": "npm run publish:npm && npm run publish:jsr"
     },
     "keywords": [
         "DI",
