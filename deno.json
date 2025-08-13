@@ -3,5 +3,8 @@
         "./packages/command",
         "./packages/inject",
         "./packages/event"
+    ],
+    "unstable": [
+        "sloppy-imports"
     ]
 }
