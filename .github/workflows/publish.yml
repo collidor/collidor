@@ -1,5 +1,3 @@
-# .github/workflows/publish.yml
-
 name: Publish
 
 on:
@@ -8,47 +6,27 @@ on:
       - main
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-      - run: pnpm i
-
-      - name: Lint
-        run: pnpm turbo lint
-
-      - name: Run Tests with Coverage
-        run: pnpm turbo test:coverage
-
-      - name: Upload to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
   publish:
     runs-on: ubuntu-latest
-    if: success()
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
       - uses: denoland/setup-deno@v2
-      # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v4
         with:
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
       - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: pnpm i
-      - name: Publish package
-        run: pnpm turbo publish-package
+      - name: Create changesets
+        run: pnpm changeset
+      - name: Version and publish to npm
+        run: |
+          pnpm changeset version
+          pnpm changeset publish
+          pnpm turbo publish-package --filter=@collidor/* --token=${{ secrets.NPM_TOKEN }}
+      - name: Publish to jsr
+        run: pnpm turbo run publish:jsr
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -35,17 +35,22 @@
                 "coverage/**"
             ]
         },
-        "publish-package": {
+        "sync:jsr": {
             "dependsOn": [
-                "build",
-                "test:coverage"
+                "^sync:jsr"
             ],
             "outputs": [
-                "dist/**",
-                "coverage/**"
+                "deno.json"
+            ]
+        },
+        "publish:jsr": {
+            "dependsOn": [
+                "sync:jsr",
+                "^publish:jsr"
             ],
-            "env": [
-                "NPM_TOKEN"
+            "outputs": [
+                "deno.json",
+                "deno.lock"
             ]
         }
     }
