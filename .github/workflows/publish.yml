@@ -8,6 +8,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allows changesets to push the version commit and tags
+      id-token: write # Allows npm to generate provenance information
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
