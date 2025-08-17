@@ -7,7 +7,7 @@
     "description": "A small library to create, register and listen to events.",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/collidor/collidor.git"
+        "url": "git@github.com:collidor/collidor.git"
     },
     "type": "module",
     "exports": {

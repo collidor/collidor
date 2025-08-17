@@ -4,7 +4,7 @@
     "description": "A small library to create, register and execute commands.",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/collidor/collidor.git"
+        "url": "git@github.com:collidor/collidor.git"
     },
     "publishConfig": {
         "access": "public"
