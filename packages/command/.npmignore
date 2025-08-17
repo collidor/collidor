@@ -3,3 +3,4 @@ deno.lock
 **/*.test.ts
 .github
 !dist
+coverage
