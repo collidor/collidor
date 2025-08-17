@@ -27,5 +27,14 @@
                 "no-explicit-any"
             ]
         }
-    }
+    },
+    "compilerOptions": {
+      "lib": [
+        "ESNext",
+        "DOM"
+      ]
+    },
+    "unstable": [
+      "sloppy-imports"
+    ]
 }
