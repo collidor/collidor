@@ -7,7 +7,8 @@
         "url": "git+https://github.com/collidor/collidor.git"
     },
     "publishConfig": {
-        "access": "public"
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
     },
     "type": "module",
     "main": "dist/main.cjs",

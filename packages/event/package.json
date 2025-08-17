@@ -1,13 +1,14 @@
 {
     "name": "@collidor/event",
     "version": "4.2.1",
-    "publishConfig": {
-        "access": "public"
-    },
     "description": "A small library to create, register and listen to events.",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/collidor/collidor.git"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
     },
     "type": "module",
     "exports": {
