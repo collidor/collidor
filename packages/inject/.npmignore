@@ -4,3 +4,5 @@ deno.lock
 .github
 !dist
 coverage
+cov_profile
+report
