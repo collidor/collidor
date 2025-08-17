@@ -1,5 +1,11 @@
 # @collidor/injector
 
+## 2.4.4
+
+### Patch Changes
+
+- 750cba9: publish
+
 ## 2.4.3
 
 ### Patch Changes

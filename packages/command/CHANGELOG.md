@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 5.3.5
+
+### Patch Changes
+
+- 750cba9: publish
+- Updated dependencies [750cba9]
+  - @collidor/event@4.2.4
+
 ## 5.3.4
 
 ### Patch Changes
