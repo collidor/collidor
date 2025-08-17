@@ -13,20 +13,23 @@ jobs:
       id-token: write # Allows npm to generate provenance information
     steps:
       - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - uses: denoland/setup-deno@v2
       - uses: actions/setup-node@v4
         with:
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
-      #   - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - run: npm ci
+      - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - run: pnpm i
       - name: Create changesets
-        run: npx changeset
+        run: pnpm changeset
       - name: Version and publish to npm
         run: |
-          npx changeset version
-          npx changeset publish
+          pnpm changeset version
+          pnpm changeset publish
+          pnpm turbo publish-package --filter=@collidor/* --token=${{ secrets.NPM_TOKEN }}
       - name: Publish to jsr
-        run: npx turbo run publish:jsr
+        run: pnpm turbo run publish:jsr
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
