@@ -20,13 +20,11 @@ jobs:
         with:
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
-      - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: pnpm i
       - name: Version and publish to npm
         run: |
-          pnpm publish -r
-          pnpm turbo publish-package --filter=@collidor/* --token=${{ secrets.NPM_TOKEN }}
-      - name: Publish to jsr
-        run: pnpm turbo run publish:jsr
+          pnpm publish -r --access public
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to jsr
+        run: pnpm turbo run publish:jsr
