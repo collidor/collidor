@@ -29,12 +29,13 @@
         }
     },
     "compilerOptions": {
-      "lib": [
-        "ESNext",
-        "DOM"
-      ]
+        "lib": [
+            "ESNext",
+            "DOM",
+            "deno.window"
+        ]
     },
     "unstable": [
-      "sloppy-imports"
+        "sloppy-imports"
     ]
 }
