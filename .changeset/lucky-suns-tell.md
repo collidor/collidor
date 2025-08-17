@@ -4,4 +4,4 @@
 "@collidor/injector": patch
 ---
 
-publish fix
+publish

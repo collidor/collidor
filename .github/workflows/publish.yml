@@ -22,12 +22,10 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: pnpm i
-      - name: Create changesets
-        run: pnpm changeset
       - name: Version and publish to npm
         run: |
           pnpm changeset version
-          pnpm changeset publish
+          pnpm publish -r
           pnpm turbo publish-package --filter=@collidor/* --token=${{ secrets.NPM_TOKEN }}
       - name: Publish to jsr
         run: pnpm turbo run publish:jsr
