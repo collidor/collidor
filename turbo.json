@@ -45,7 +45,6 @@
         },
         "publish:jsr": {
             "dependsOn": [
-                "sync:jsr",
                 "^publish:jsr"
             ],
             "outputs": [

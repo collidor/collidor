@@ -747,6 +747,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@changesets/cli@^2.29.5",
         "npm:turbo@^2.5.5"
       ]
     },
