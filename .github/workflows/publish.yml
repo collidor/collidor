@@ -37,7 +37,7 @@ jobs:
           title: "chore: update versions"
           publish: pnpm publish -r --access public
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to jsr
         run: pnpm turbo run publish:jsr
