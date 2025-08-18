@@ -3,3 +3,4 @@ dist
 coverage
 cov_profile
 **/.turbo/
+.env

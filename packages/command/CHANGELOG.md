@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 5.3.6
+
+### Patch Changes
+
+- publish
+- Updated dependencies
+  - @collidor/event@4.2.5
+
 ## 5.3.5
 
 ### Patch Changes

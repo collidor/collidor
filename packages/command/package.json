@@ -1,6 +1,6 @@
 {
     "name": "@collidor/command",
-    "version": "5.3.5",
+    "version": "5.3.6",
     "description": "A small library to create, register and execute commands.",
     "repository": {
         "type": "git",
@@ -20,7 +20,7 @@
         "test": "deno test",
         "lint": "deno lint",
         "test:coverage": "deno test --coverage && deno coverage --lcov --output=./coverage/lcov.info && deno coverage --html",
-        "publish:jsr": "npx jsr publish",
+        "publish:jsr": "deno run --allow-all ./publishJsr.ts",
         "sync:jsr": "deno run --allow-read --allow-write ./sync.ts"
     },
     "keywords": [
@@ -36,6 +36,6 @@
         "typescript": "5.8.3"
     },
     "peerDependencies": {
-        "@collidor/event": "^4.2.4"
+        "@collidor/event": "^4.2.5"
     }
 }

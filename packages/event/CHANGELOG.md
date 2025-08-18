@@ -1,5 +1,11 @@
 # @collidor/event
 
+## 4.2.5
+
+### Patch Changes
+
+- publish
+
 ## 4.2.4
 
 ### Patch Changes

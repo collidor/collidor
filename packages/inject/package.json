@@ -1,6 +1,6 @@
 {
     "name": "@collidor/injector",
-    "version": "2.4.4",
+    "version": "2.4.5",
     "publishConfig": {
         "access": "public"
     },
@@ -20,7 +20,7 @@
         "test": "deno test",
         "lint": "deno lint",
         "test:coverage": "deno test --coverage && deno coverage --lcov --output=./coverage/lcov.info && deno coverage --html",
-        "publish:jsr": "npx jsr publish",
+        "publish:jsr": "deno run --allow-all ./publishJsr.ts",
         "sync:jsr": "deno run --allow-read --allow-write ./sync.ts"
     },
     "keywords": [
