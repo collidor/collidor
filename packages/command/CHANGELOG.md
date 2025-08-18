@@ -8,6 +8,7 @@
 - publish
 - Updated dependencies [17c8fc2]
 - Updated dependencies
+- Updated dependencies [17c8fc2]
   - @collidor/event@4.2.6
 
 ## 5.3.6
