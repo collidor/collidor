@@ -1,6 +1,5 @@
-const command = new Deno.Command("npx", {
+const command = new Deno.Command("deno", {
   args: [
-    "jsr",
     "publish",
   ],
   cwd: import.meta.dirname!,

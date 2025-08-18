@@ -5,7 +5,8 @@
     "private": true,
     "main": "index.js",
     "scripts": {
-        "bump": "pnpm changeset && pnpm changeset version && pnpm turbo run sync:jsr"
+        "bump": "pnpm changeset && pnpm changeset version && pnpm turbo run sync:jsr",
+        "ci:publish": "pnpm turbo run publish:jsr && pnpm publish -r --access public"
     },
     "keywords": [],
     "author": "",

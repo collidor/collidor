@@ -1,5 +1,11 @@
 # @collidor/injector
 
+## 2.4.9
+
+### Patch Changes
+
+- publish test
+
 ## 2.4.8
 
 ### Patch Changes
