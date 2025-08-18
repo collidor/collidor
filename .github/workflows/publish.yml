@@ -20,6 +20,10 @@ jobs:
       - name: Checkout code repository
         uses: actions/checkout@v4
 
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
@@ -32,6 +36,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Create and publish versions
+        id: changesets
         uses: changesets/action@v1
         with:
           commit: "chore: update versions"
@@ -40,5 +45,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Sync deno versions
+        if: steps.changesets.outputs.hasChangesets == 'true'
+        run: pnpm turbo run sync:jsr
       - name: Publish to jsr
-        run: pnpm turbo run publish:jsr
+        if: steps.changesets.outputs.published == 'true'
+        run: node -e "console.log(process.argv[1])" ${{ steps.changesets.outputs.publishedPackages  }}
+        # run: pnpm turbo run publish:jsr
