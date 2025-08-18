@@ -1,5 +1,15 @@
 # @collidor/command
 
+## 5.3.8
+
+### Patch Changes
+
+- 09d97fb: publish test
+- publish test
+- Updated dependencies [09d97fb]
+- Updated dependencies
+  - @collidor/event@4.2.7
+
 ## 5.3.7
 
 ### Patch Changes
