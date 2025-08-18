@@ -49,6 +49,6 @@ jobs:
         if: steps.changesets.outputs.hasChangesets == 'true'
         run: pnpm turbo run sync:jsr
       - name: Publish to jsr
-        if: steps.changesets.outputs.published == 'true'
-        run: node -e "console.log(process.argv[1])" ${{ steps.changesets.outputs.publishedPackages  }}
+        if: steps.changesets.outputs
+        run: node -e "console.log(process.argv[1])" ${{ steps.changesets.outputs  }}
         # run: pnpm turbo run publish:jsr
