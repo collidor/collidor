@@ -50,6 +50,10 @@
             "outputs": [
                 "deno.json",
                 "deno.lock"
+            ],
+            "env": [
+                "JSR_TOKEN",
+                "NPM_TOKEN"
             ]
         }
     }

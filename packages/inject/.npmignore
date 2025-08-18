@@ -7,3 +7,4 @@ coverage
 cov_profile
 report
 .turbo
+publishJsr.ts

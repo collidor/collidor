@@ -1,7 +1,10 @@
 const command = new Deno.Command("deno", {
   args: [
     "publish",
+    "--token",
+    Deno.env.get("JSR_TOKEN")!,
   ],
+  env: Deno.env.toObject(),
   cwd: import.meta.dirname!,
   stdin: "inherit",
   stdout: "inherit",
