@@ -1,5 +1,11 @@
 # @collidor/injector
 
+## 2.4.6
+
+### Patch Changes
+
+- 17c8fc2: publish test
+
 ## 2.4.5
 
 ### Patch Changes
