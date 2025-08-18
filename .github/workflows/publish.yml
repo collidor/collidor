@@ -35,20 +35,18 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
       - name: Create and publish versions
         id: changesets
         uses: changesets/action@v1
         with:
+          version: "pnpm changeset version && pnpm turbo run sync:jsr"
           commit: "chore: update versions"
           title: "chore: update versions"
-          publish: pnpm publish -r --access public
+          publish: "pnpm publish -r --access public"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Sync deno versions
-        if: steps.changesets.outputs.hasChangesets == 'true'
-        run: pnpm turbo run sync:jsr
       - name: Publish to jsr
-        if: steps.changesets.outputs
-        run: node -e "console.log(process.argv[1])" ${{ steps.changesets.outputs  }}
-        # run: pnpm turbo run publish:jsr
+        if: steps.changesets.outputs.published == 'true'
+        run: pnpm turbo run publish:jsr
