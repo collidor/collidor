@@ -9,7 +9,7 @@ export {
 } from "./commandBus.ts";
 
 export {
-  type CommandSerializer as Serializer,
+  type CommandSerializer,
   httpClientPlugin,
   httpServerPlugin,
 } from "./plugins/httpPlugin.ts";
