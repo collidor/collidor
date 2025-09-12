@@ -1,6 +1,6 @@
 {
     "name": "@collidor/toolkit",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",
@@ -31,13 +31,13 @@
     "author": "Alykam Burdzaki <alykam@gmail.com> (https://alykam.com)",
     "license": "MIT",
     "devDependencies": {
-        "@collidor/event": "workspace:*",
         "tsup": "8.5.0",
         "typescript": "5.8.3"
     },
     "dependencies": {
         "@collidor/event": "workspace:*",
         "@collidor/command": "workspace:*",
-        "@collidor/injector": "workspace:*"
+        "@collidor/injector": "workspace:*",
+        "@collidor/schema-command": "workspace:*"
     }
 }

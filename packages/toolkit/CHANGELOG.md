@@ -1,5 +1,16 @@
 # @collidor/command
 
+## 0.0.3
+
+### Patch Changes
+
+- add schema toolkit
+- Updated dependencies
+  - @collidor/command@5.3.13
+  - @collidor/event@4.2.11
+  - @collidor/injector@2.4.11
+  - @collidor/schema-command@0.0.2
+
 ## 0.0.2
 
 ### Patch Changes

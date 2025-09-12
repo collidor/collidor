@@ -1,5 +1,11 @@
 # @collidor/event
 
+## 4.2.11
+
+### Patch Changes
+
+- add schema toolkit
+
 ## 4.2.10
 
 ### Patch Changes

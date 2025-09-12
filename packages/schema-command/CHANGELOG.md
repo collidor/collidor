@@ -1,19 +1,22 @@
 # @collidor/command
 
-## 5.3.13
+## 0.0.2
 
 ### Patch Changes
 
 - add schema toolkit
 - Updated dependencies
-  - @collidor/event@4.2.11
+  - @collidor/command@5.3.13
 
-## 5.3.12
+## 0.0.2
 
 ### Patch Changes
 
-- a8b57a3: change export name
+- 677ef8f: first package
 - 80e351b: add command to toolkit
+- Updated dependencies [a8b57a3]
+- Updated dependencies [80e351b]
+  - @collidor/command@5.3.12
 
 ## 5.3.11
 

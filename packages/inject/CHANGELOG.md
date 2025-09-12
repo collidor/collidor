@@ -1,5 +1,11 @@
 # @collidor/injector
 
+## 2.4.11
+
+### Patch Changes
+
+- add schema toolkit
+
 ## 2.4.10
 
 ### Patch Changes
