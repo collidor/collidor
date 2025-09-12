@@ -1,7 +1,7 @@
 const command = new Deno.Command("deno", {
   args: [
     "publish",
-    "--token ",
+    "--token",
     Deno.env.get("JSR_TOKEN")!,
   ],
   env: Deno.env.toObject(),

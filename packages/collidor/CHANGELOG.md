@@ -1,5 +1,15 @@
 # @collidor/command
 
+## 0.0.2
+
+### Patch Changes
+
+- 677ef8f: first package
+- 80e351b: add command to toolkit
+- Updated dependencies [a8b57a3]
+- Updated dependencies [80e351b]
+  - @collidor/command@5.3.12
+
 ## 5.3.11
 
 ### Patch Changes
