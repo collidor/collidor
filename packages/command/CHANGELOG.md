@@ -1,5 +1,12 @@
 # @collidor/command
 
+## 5.3.12
+
+### Patch Changes
+
+- a8b57a3: change export name
+- 80e351b: add command to toolkit
+
 ## 5.3.11
 
 ### Patch Changes
