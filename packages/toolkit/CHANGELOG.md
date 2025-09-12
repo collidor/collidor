@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 0.0.4
+
+### Patch Changes
+
+- Update readme and fix npmrc
+- Updated dependencies
+  - @collidor/schema-command@0.0.3
+
 ## 0.0.3
 
 ### Patch Changes

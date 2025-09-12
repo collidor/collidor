@@ -1,6 +1,6 @@
 {
     "name": "@collidor/schema-command",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",

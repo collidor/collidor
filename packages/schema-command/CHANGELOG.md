@@ -1,5 +1,11 @@
 # @collidor/command
 
+## 0.0.3
+
+### Patch Changes
+
+- Update readme and fix npmrc
+
 ## 0.0.2
 
 ### Patch Changes
