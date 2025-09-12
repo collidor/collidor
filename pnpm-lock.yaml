@@ -16,6 +16,25 @@ importers:
         specifier: ^2.5.5
         version: 2.5.5
 
+  packages/collidor:
+    dependencies:
+      '@collidor/command':
+        specifier: workspace:*
+        version: link:../command
+      '@collidor/event':
+        specifier: workspace:*
+        version: link:../event
+      '@collidor/injector':
+        specifier: workspace:*
+        version: link:../inject
+    devDependencies:
+      tsup:
+        specifier: 8.5.0
+        version: 8.5.0(@swc/core@1.13.3)(typescript@5.8.3)
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
+
   packages/command:
     devDependencies:
       '@collidor/event':

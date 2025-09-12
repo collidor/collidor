@@ -37,13 +37,13 @@ function parseHeaders<TContext extends ContextType = ContextType>(
   return newHeaders;
 }
 
-export type Serializer<S extends BodyInit> = {
+export type CommandSerializer<S extends BodyInit> = {
   serialize: (data: any, headers: Headers) => S;
   deserializeResponse: (response: Response) => Promise<any>;
   deserializeRequest: (request: Request) => Promise<any>;
 };
 
-const defaultSerializer: Serializer<string> = {
+const defaultSerializer: CommandSerializer<string> = {
   serialize: (data, headers) => {
     if (!headers.has("Content-Type")) {
       headers.set("Content-Type", "application/json");
@@ -69,7 +69,7 @@ export function httpClientPlugin<
     | ((command: Command, context: TContext) => string | URL),
   options?: {
     headers?: ArgHeaders<TContext>;
-    serializer?: Serializer<TSerializer>;
+    serializer?: CommandSerializer<TSerializer>;
     requestInit?: RequestInit;
   },
 ): CommandBusPlugin<Command, TContext, Promise<Command[COMMAND_RETURN]>> & {
@@ -125,7 +125,7 @@ export function httpServerPlugin<
   TSerializer extends BodyInit = string,
 >(
   options?: {
-    serializer?: Serializer<TSerializer>;
+    serializer?: CommandSerializer<TSerializer>;
   },
 ): CommandBusPlugin<Command, TContext, Promise<Command[COMMAND_RETURN]>> & {
   getCommandFromRequest: (
