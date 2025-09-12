@@ -1,5 +1,5 @@
 {
-    "name": "collidor",
+    "name": "@collidor/toolkit",
     "version": "0.0.1",
     "description": "An umbrella package for collidor libraries.",
     "repository": {
