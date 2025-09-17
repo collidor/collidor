@@ -1,5 +1,11 @@
 # @collidor/event
 
+## 4.2.12
+
+### Patch Changes
+
+- Reupload
+
 ## 4.2.11
 
 ### Patch Changes

@@ -1,4 +1,4 @@
-import { assertExists } from "jsr:@std/assert";
+import { assertExists } from "@std/assert";
 
 Deno.test("collidor package", async (t) => {
   await t.step("should import all sub-packages", async () => {

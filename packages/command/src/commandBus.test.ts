@@ -1,4 +1,4 @@
-import { assertEquals, assertRejects, assertThrows } from "jsr:@std/assert";
+import { assertEquals, assertRejects, assertThrows } from "@std/assert";
 import { Command, type COMMAND_RETURN } from "./commandModel.ts";
 import { CommandBus } from "./commandBus.ts";
 import type { CommandBusPlugin } from "./main.ts";

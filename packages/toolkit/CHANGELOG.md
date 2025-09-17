@@ -1,5 +1,16 @@
 # @collidor/command
 
+## 0.0.5
+
+### Patch Changes
+
+- Reupload
+- Updated dependencies
+  - @collidor/command@5.3.14
+  - @collidor/event@4.2.12
+  - @collidor/injector@2.4.12
+  - @collidor/schema-command@0.0.4
+
 ## 0.0.4
 
 ### Patch Changes

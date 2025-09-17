@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 5.3.14
+
+### Patch Changes
+
+- Reupload
+- Updated dependencies
+  - @collidor/event@4.2.12
+
 ## 5.3.13
 
 ### Patch Changes

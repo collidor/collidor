@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 0.0.4
+
+### Patch Changes
+
+- Reupload
+- Updated dependencies
+  - @collidor/command@5.3.14
+
 ## 0.0.3
 
 ### Patch Changes

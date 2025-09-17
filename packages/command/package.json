@@ -1,6 +1,6 @@
 {
     "name": "@collidor/command",
-    "version": "5.3.13",
+    "version": "5.3.14",
     "description": "A small library to create, register and execute commands.",
     "repository": {
         "type": "git",
@@ -36,6 +36,6 @@
         "typescript": "5.8.3"
     },
     "peerDependencies": {
-        "@collidor/event": "^4.2.11"
+        "@collidor/event": "^4.2.12"
     }
 }

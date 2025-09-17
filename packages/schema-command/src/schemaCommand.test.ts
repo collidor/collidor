@@ -1,4 +1,4 @@
-import { assertExists } from "jsr:@std/assert";
+import { assertExists } from "@std/assert";
 import { SchemaCommand } from "./schemaCommand.ts";
 
 Deno.test("schema-command package", () => {
