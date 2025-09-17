@@ -1,5 +1,11 @@
 # @collidor/injector
 
+## 2.4.13
+
+### Patch Changes
+
+- Export Inject types
+
 ## 2.4.12
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 0.0.6
+
+### Patch Changes
+
+- Export Inject types
+- Updated dependencies
+  - @collidor/injector@2.4.13
+
 ## 0.0.5
 
 ### Patch Changes
