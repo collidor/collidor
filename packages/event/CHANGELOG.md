@@ -1,5 +1,11 @@
 # @collidor/event
 
+## 4.2.13
+
+### Patch Changes
+
+- update tsup and export injector register type
+
 ## 4.2.12
 
 ### Patch Changes

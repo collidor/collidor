@@ -18,6 +18,10 @@ export type SafeInject = <
   type: T,
 ) => Q | null;
 
+export type Register = <T = any, Q = any>(type: Q, instance: T) => void;
+
+export type Unregister = <T = any>(type: T) => void;
+
 export class Injector {
   private instances = new Map<any, any>();
   public parentInjector?: Injector;
@@ -26,7 +30,7 @@ export class Injector {
     this.parentInjector = parentInjector;
   }
 
-  public register = <T = any, Q = any>(type: Q, instance: T): void => {
+  public register: Register = (type, instance) => {
     this.instances.set(type, instance);
   };
 
@@ -42,7 +46,7 @@ export class Injector {
     return this.instances.get(type);
   };
 
-  public unregister = <T = any>(type: T): void => {
+  public unregister: Unregister = (type) => {
     this.instances.delete(type);
   };
 

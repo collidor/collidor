@@ -1,6 +1,6 @@
 {
     "name": "@collidor/injector",
-    "version": "2.4.13",
+    "version": "2.4.14",
     "license": "MIT",
     "exports": "./src/main.ts",
     "publish": {

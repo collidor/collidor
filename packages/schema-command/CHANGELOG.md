@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 0.0.5
+
+### Patch Changes
+
+- update tsup and export injector register type
+- Updated dependencies
+  - @collidor/command@5.3.15
+
 ## 0.0.4
 
 ### Patch Changes

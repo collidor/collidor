@@ -1,6 +1,6 @@
 {
     "name": "@collidor/toolkit",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",
@@ -32,11 +32,11 @@
     "license": "MIT",
     "devDependencies": {
         "tsup": "8.5.0",
-        "typescript": "5.8.3"
+        "typescript": "5.9.2"
     },
     "dependencies": {
-        "@collidor/event": "workspace:*",
         "@collidor/command": "workspace:*",
+        "@collidor/event": "workspace:*",
         "@collidor/injector": "workspace:*",
         "@collidor/schema-command": "workspace:*"
     }

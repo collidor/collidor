@@ -1,5 +1,11 @@
 # @collidor/injector
 
+## 2.4.14
+
+### Patch Changes
+
+- update tsup and export injector register type
+
 ## 2.4.13
 
 ### Patch Changes

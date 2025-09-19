@@ -1,6 +1,6 @@
 {
     "name": "@collidor/event",
-    "version": "4.2.12",
+    "version": "4.2.13",
     "publishConfig": {
         "access": "public"
     },
@@ -38,7 +38,7 @@
     "author": "Alykam Burdzaki <alykam@gmail.com> (https://alykam.com)",
     "license": "MIT",
     "devDependencies": {
-        "tsup": "^8.3.6",
-        "typescript": "^5.7.3"
+        "tsup": "^8.5.0",
+        "typescript": "^5.9.2"
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "@collidor/schema-command",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",
@@ -32,12 +32,12 @@
     "license": "MIT",
     "devDependencies": {
         "tsup": "8.5.0",
-        "typescript": "5.8.3",
+        "typescript": "5.9.2",
         "zod": "^4"
     },
     "dependencies": {
         "@collidor/command": "workspace:*",
-        "zod": "^4"
+        "zod": "^4.1.9"
     },
     "peerDependencies": {
         "zod": "^4"
