@@ -1,5 +1,11 @@
 # @collidor/command
 
+## 0.0.7
+
+### Patch Changes
+
+- Re-export injector types
+
 ## 0.0.6
 
 ### Patch Changes
