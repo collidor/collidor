@@ -1,5 +1,11 @@
 # @collidor/injector
 
+## 2.4.15
+
+### Patch Changes
+
+- change re-export for nodejs support
+
 ## 2.4.14
 
 ### Patch Changes

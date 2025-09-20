@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 0.0.9
+
+### Patch Changes
+
+- change re-export for nodejs support
+- Updated dependencies
+  - @collidor/injector@2.4.15
+
 ## 0.0.8
 
 ### Patch Changes

@@ -1,6 +1,32 @@
-export * from "@collidor/injector";
-export * from "@collidor/event";
-export {
+import {
+  type Inject,
+  Injector,
+  type Register,
+  type SafeInject,
+  type Type,
+  type Unregister,
+} from "@collidor/injector";
+import {
+  type Channel,
+  type ChannelEvent,
+  type Clonable,
+  type CloseEvent,
+  type DataEvent,
+  Event,
+  EventBus,
+  type EventHandler,
+  type MessagePortLike,
+  PortChannel,
+  type PortChannelOptions,
+  PortEvents,
+  PortEventTypes,
+  type Serializer,
+  type StartEvent,
+  type SubscribeEvent,
+  type UnsubscribeEvent,
+  type VerboseLevel,
+} from "@collidor/event";
+import {
   Command,
   COMMAND_RETURN,
   CommandBus,
@@ -14,4 +40,50 @@ export {
   type PortChannelPluginOptions,
   type StreamPluginHandler,
 } from "@collidor/command";
-export * from "@collidor/schema-command";
+import {
+  SchemaCommand,
+  schemaCommand,
+  type SchemaCommandType,
+} from "@collidor/schema-command";
+
+export {
+  type Channel,
+  type ChannelEvent,
+  type Clonable,
+  type CloseEvent,
+  Command,
+  COMMAND_RETURN,
+  CommandBus,
+  type CommandBusOptions,
+  type CommandBusPlugin,
+  type CommandSerializer,
+  type DataEvent,
+  Event,
+  EventBus,
+  type EventHandler,
+  httpClientPlugin,
+  httpServerPlugin,
+  type Inject,
+  Injector,
+  type MessagePortLike,
+  type PluginHandler,
+  PortChannel,
+  type PortChannelOptions,
+  PortChannelPlugin,
+  type PortChannelPluginOptions,
+  PortEvents,
+  PortEventTypes,
+  type Register,
+  type SafeInject,
+  SchemaCommand,
+  schemaCommand,
+  type SchemaCommandType,
+  type Serializer,
+  type StartEvent,
+  type StreamPluginHandler,
+  type SubscribeEvent,
+  type Type,
+  type Unregister,
+  type UnsubscribeEvent,
+  type VerboseLevel,
+};
