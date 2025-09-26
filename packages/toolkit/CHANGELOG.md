@@ -1,5 +1,15 @@
 # @collidor/command
 
+## 0.0.10
+
+### Patch Changes
+
+- Add cleanup callback to event.on return
+- Updated dependencies
+  - @collidor/event@4.3.0
+  - @collidor/command@6.0.0
+  - @collidor/schema-command@0.0.6
+
 ## 0.0.9
 
 ### Patch Changes

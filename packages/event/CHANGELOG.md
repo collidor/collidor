@@ -1,5 +1,11 @@
 # @collidor/event
 
+## 4.3.0
+
+### Minor Changes
+
+- Add cleanup callback to event.on return
+
 ## 4.2.13
 
 ### Patch Changes
