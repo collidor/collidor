@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 0.0.7
+
+### Patch Changes
+
+- Create result and fix dependencies sync
+- Updated dependencies
+  - @collidor/command@6.0.1
+
 ## 0.0.6
 
 ### Patch Changes

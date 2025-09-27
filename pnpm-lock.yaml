@@ -37,7 +37,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
 
-  packages/inject:
+  packages/injector:
     devDependencies:
       '@swc/core':
         specifier: ^1.13.5
@@ -49,14 +49,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
 
-  packages/schema-command:
-    dependencies:
-      '@collidor/command':
-        specifier: workspace:*
-        version: link:../command
-      zod:
-        specifier: ^4.1.9
-        version: 4.1.9
+  packages/result:
     devDependencies:
       tsup:
         specifier: 8.5.0
@@ -64,6 +57,22 @@ importers:
       typescript:
         specifier: 5.9.2
         version: 5.9.2
+
+  packages/schema-command:
+    dependencies:
+      '@collidor/command':
+        specifier: workspace:*
+        version: link:../command
+    devDependencies:
+      tsup:
+        specifier: 8.5.0
+        version: 8.5.0(@swc/core@1.13.5)(typescript@5.9.2)
+      typescript:
+        specifier: 5.9.2
+        version: 5.9.2
+      zod:
+        specifier: ^4
+        version: 4.1.9
 
   packages/toolkit:
     dependencies:
@@ -75,7 +84,10 @@ importers:
         version: link:../event
       '@collidor/injector':
         specifier: workspace:*
-        version: link:../inject
+        version: link:../injector
+      '@collidor/result':
+        specifier: workspace:*
+        version: link:../result
       '@collidor/schema-command':
         specifier: workspace:*
         version: link:../schema-command

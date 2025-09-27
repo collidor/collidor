@@ -1,5 +1,11 @@
 # @collidor/event
 
+## 4.3.1
+
+### Patch Changes
+
+- Create result and fix dependencies sync
+
 ## 4.3.0
 
 ### Minor Changes

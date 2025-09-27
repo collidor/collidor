@@ -1,5 +1,11 @@
 # @collidor/injector
 
+## 2.4.16
+
+### Patch Changes
+
+- Create result and fix dependencies sync
+
 ## 2.4.15
 
 ### Patch Changes

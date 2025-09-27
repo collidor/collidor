@@ -1,6 +1,6 @@
 {
     "name": "@collidor/toolkit",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "license": "MIT",
     "exports": "./src/main.ts",
     "compilerOptions": {
@@ -33,7 +33,8 @@
         "@collidor/event": "jsr:@collidor/event@^4",
         "@collidor/command": "jsr:@collidor/command@^5",
         "@collidor/injector": "jsr:@collidor/injector@^2",
-        "@collidor/schema-command": "jsr:@collidor/schema-command@^0"
+        "@collidor/schema-command": "jsr:@collidor/schema-command@^0",
+        "@collidor/result": "jsr:@collidor/result@^0"
     },
     "lint": {
         "rules": {

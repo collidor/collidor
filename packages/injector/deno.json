@@ -1,6 +1,6 @@
 {
     "name": "@collidor/injector",
-    "version": "2.4.15",
+    "version": "2.4.16",
     "license": "MIT",
     "exports": "./src/main.ts",
     "publish": {
@@ -34,8 +34,5 @@
             "DOM",
             "deno.window"
         ]
-    },
-    "unstable": [
-        "sloppy-imports"
-    ]
+    }
 }

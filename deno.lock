@@ -22,8 +22,7 @@
     "npm:turbo@^2.5.6": "2.5.8",
     "npm:typescript@5.9.2": "5.9.2",
     "npm:typescript@^5.9.2": "5.9.2",
-    "npm:zod@4": "4.1.11",
-    "npm:zod@^4.1.9": "4.1.11"
+    "npm:zod@4": "4.1.11"
   },
   "jsr": {
     "@collidor/command@5.3.15": {
@@ -1505,7 +1504,7 @@
           ]
         }
       },
-      "packages/inject": {
+      "packages/injector": {
         "dependencies": [
           "jsr:@std/assert@1"
         ],
@@ -1514,6 +1513,18 @@
             "npm:@swc/core@^1.13.5",
             "npm:tsup@^8.5.0",
             "npm:typescript@^5.9.2"
+          ]
+        }
+      },
+      "packages/result": {
+        "dependencies": [
+          "jsr:@std/assert@^1.0.11",
+          "jsr:@std/testing@^1.0.9"
+        ],
+        "packageJson": {
+          "dependencies": [
+            "npm:tsup@8.5.0",
+            "npm:typescript@5.9.2"
           ]
         }
       },
@@ -1528,8 +1539,7 @@
           "dependencies": [
             "npm:tsup@8.5.0",
             "npm:typescript@5.9.2",
-            "npm:zod@4",
-            "npm:zod@^4.1.9"
+            "npm:zod@4"
           ]
         }
       },
@@ -1538,6 +1548,7 @@
           "jsr:@collidor/command@5",
           "jsr:@collidor/event@4",
           "jsr:@collidor/injector@2",
+          "jsr:@collidor/result@0",
           "jsr:@collidor/schema-command@0",
           "jsr:@std/assert@^1.0.11",
           "jsr:@std/testing@^1.0.9"

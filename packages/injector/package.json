@@ -1,14 +1,14 @@
 {
-    "name": "@collidor/schema-command",
-    "version": "0.0.7",
-    "description": "An umbrella package for collidor libraries.",
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:collidor/collidor.git",
-        "directory": "packages/collidor"
-    },
+    "name": "@collidor/injector",
+    "version": "2.4.16",
     "publishConfig": {
         "access": "public"
+    },
+    "description": "A tiny dependency injection container with type inference",
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/collidor/collidor.git",
+        "directory": "packages/inject"
     },
     "type": "module",
     "main": "dist/main.cjs",
@@ -24,21 +24,20 @@
         "sync:jsr": "deno run --allow-read --allow-write ./sync.ts"
     },
     "keywords": [
-        "command",
-        "command bus",
-        "command handler"
+        "DI",
+        "dependency injection",
+        "container",
+        "injector",
+        "injection",
+        "dependency",
+        "injection container",
+        "dependency injection container"
     ],
     "author": "Alykam Burdzaki <alykam@gmail.com> (https://alykam.com)",
     "license": "MIT",
     "devDependencies": {
-        "tsup": "8.5.0",
-        "typescript": "5.9.2",
-        "zod": "^4"
-    },
-    "dependencies": {
-        "@collidor/command": "workspace:*"
-    },
-    "peerDependencies": {
-        "zod": "^4"
+        "@swc/core": "^1.13.5",
+        "tsup": "^8.5.0",
+        "typescript": "^5.9.2"
     }
 }

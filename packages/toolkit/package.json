@@ -1,6 +1,6 @@
 {
     "name": "@collidor/toolkit",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",
@@ -38,6 +38,7 @@
         "@collidor/command": "workspace:*",
         "@collidor/event": "workspace:*",
         "@collidor/injector": "workspace:*",
-        "@collidor/schema-command": "workspace:*"
+        "@collidor/schema-command": "workspace:*",
+        "@collidor/result": "workspace:*"
     }
 }

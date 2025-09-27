@@ -6,6 +6,7 @@ import {
   type Type,
   type Unregister,
 } from "@collidor/injector";
+
 import {
   type Channel,
   type ChannelEvent,
@@ -26,6 +27,7 @@ import {
   type UnsubscribeEvent,
   type VerboseLevel,
 } from "@collidor/event";
+
 import {
   Command,
   COMMAND_RETURN,
@@ -40,11 +42,21 @@ import {
   type PortChannelPluginOptions,
   type StreamPluginHandler,
 } from "@collidor/command";
+
 import {
   SchemaCommand,
   schemaCommand,
   type SchemaCommandType,
 } from "@collidor/schema-command";
+
+import {
+  type Err,
+  type ErrorLike,
+  type None,
+  type Ok,
+  Result,
+  type Unwrap,
+} from "@collidor/result";
 
 export {
   type Channel,
@@ -58,6 +70,8 @@ export {
   type CommandBusPlugin,
   type CommandSerializer,
   type DataEvent,
+  type Err,
+  type ErrorLike,
   Event,
   EventBus,
   type EventHandler,
@@ -66,6 +80,8 @@ export {
   type Inject,
   Injector,
   type MessagePortLike,
+  type None,
+  type Ok,
   type PluginHandler,
   PortChannel,
   type PortChannelOptions,
@@ -74,6 +90,7 @@ export {
   PortEvents,
   PortEventTypes,
   type Register,
+  Result,
   type SafeInject,
   SchemaCommand,
   schemaCommand,
@@ -85,5 +102,6 @@ export {
   type Type,
   type Unregister,
   type UnsubscribeEvent,
+  type Unwrap,
   type VerboseLevel,
 };

@@ -1,89 +1,48 @@
 # @collidor/command
 
-## 0.0.11
+## 0.0.2
 
 ### Patch Changes
 
 - Create result and fix dependencies sync
-- Updated dependencies
-  - @collidor/schema-command@0.0.7
-  - @collidor/command@6.0.1
-  - @collidor/event@4.3.1
-  - @collidor/injector@2.4.16
-  - @collidor/result@0.0.2
-
-## 0.0.10
-
-### Patch Changes
-
-- Add cleanup callback to event.on return
-- Updated dependencies
-  - @collidor/event@4.3.0
-  - @collidor/command@6.0.0
-  - @collidor/schema-command@0.0.6
-
-## 0.0.9
-
-### Patch Changes
-
-- change re-export for nodejs support
-- Updated dependencies
-  - @collidor/injector@2.4.15
-
-## 0.0.8
-
-### Patch Changes
-
-- update tsup and export injector register type
-- Updated dependencies
-  - @collidor/schema-command@0.0.5
-  - @collidor/command@5.3.15
-  - @collidor/injector@2.4.14
-  - @collidor/event@4.2.13
-
-## 0.0.7
-
-### Patch Changes
-
-- Re-export injector types
 
 ## 0.0.6
 
 ### Patch Changes
 
-- Export Inject types
+- Add cleanup callback to event.on return
 - Updated dependencies
-  - @collidor/injector@2.4.13
+  - @collidor/command@6.0.0
 
 ## 0.0.5
+
+### Patch Changes
+
+- update tsup and export injector register type
+- Updated dependencies
+  - @collidor/command@5.3.15
+
+## 0.0.4
 
 ### Patch Changes
 
 - Reupload
 - Updated dependencies
   - @collidor/command@5.3.14
-  - @collidor/event@4.2.12
-  - @collidor/injector@2.4.12
-  - @collidor/schema-command@0.0.4
 
-## 0.0.4
+## 0.0.3
 
 ### Patch Changes
 
 - Update readme and fix npmrc
-- Updated dependencies
-  - @collidor/schema-command@0.0.3
 
-## 0.0.3
+## 0.0.2
 
 ### Patch Changes
 
 - add schema toolkit
 - Updated dependencies
   - @collidor/command@5.3.13
-  - @collidor/event@4.2.11
-  - @collidor/injector@2.4.11
-  - @collidor/schema-command@0.0.2
 
 ## 0.0.2
 
