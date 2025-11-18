@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 0.0.12
+
+### Patch Changes
+
+- SchemaCommand now has zod schema for output
+- Updated dependencies
+  - @collidor/schema-command@0.1.0
+
 ## 0.0.11
 
 ### Patch Changes
