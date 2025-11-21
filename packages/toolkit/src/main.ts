@@ -58,6 +58,8 @@ import {
   type Unwrap,
 } from "@collidor/result";
 
+import { ObservableCommandBus } from "@collidor/observable-command";
+
 export {
   type Channel,
   type ChannelEvent,
@@ -81,6 +83,7 @@ export {
   Injector,
   type MessagePortLike,
   type None,
+  ObservableCommandBus,
   type Ok,
   type PluginHandler,
   PortChannel,

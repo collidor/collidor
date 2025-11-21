@@ -110,7 +110,7 @@ export class CommandBus<
     }
   }
 
-  private context: TContext;
+  public context: TContext;
 
   register<C extends Command>(
     command: Type<C>,

@@ -1,5 +1,11 @@
 # @collidor/command
 
+## 6.0.2
+
+### Patch Changes
+
+- Added observable command
+
 ## 6.0.1
 
 ### Patch Changes

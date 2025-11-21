@@ -17,6 +17,7 @@
     "jsr:@std/testing@^1.0.9": "1.0.10",
     "npm:@changesets/cli@^2.29.7": "2.29.7",
     "npm:@swc/core@^1.13.5": "1.13.19",
+    "npm:rxjs@^7.8.2": "7.8.2",
     "npm:tsup@8.5.0": "8.5.0_@swc+core@1.13.19_typescript@5.9.2_esbuild@0.25.10",
     "npm:tsup@^8.5.0": "8.5.0_@swc+core@1.13.19_typescript@5.9.2_esbuild@0.25.10",
     "npm:turbo@^2.5.6": "2.5.8",
@@ -1224,6 +1225,12 @@
         "queue-microtask"
       ]
     },
+    "rxjs@7.8.2": {
+      "integrity": "sha512-dhKf903U/PQZY6boNNtAGdWbG85WAbjT/1xYoZIC7FAY0yWapOBQVsVrDl58W86//e1VpMNBtRV4MaXfdMySFA==",
+      "dependencies": [
+        "tslib"
+      ]
+    },
     "safer-buffer@2.1.2": {
       "integrity": "sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg=="
     },
@@ -1350,6 +1357,9 @@
     },
     "ts-interface-checker@0.1.13": {
       "integrity": "sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA=="
+    },
+    "tslib@2.8.1": {
+      "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
     },
     "tsup@8.5.0_@swc+core@1.13.19_typescript@5.9.2_esbuild@0.25.10": {
       "integrity": "sha512-VmBp77lWNQq6PfuMqCHD3xWl22vEoWsKajkF8t+yMBawlUS8JzEI+vOVMeuNZIuMML8qXRizFKi9oD5glKQVcQ==",
@@ -1513,6 +1523,22 @@
             "npm:@swc/core@^1.13.5",
             "npm:tsup@^8.5.0",
             "npm:typescript@^5.9.2"
+          ]
+        }
+      },
+      "packages/observable-command": {
+        "dependencies": [
+          "jsr:@collidor/command@5",
+          "jsr:@std/assert@^1.0.11",
+          "jsr:@std/testing@^1.0.9",
+          "npm:zod@4"
+        ],
+        "packageJson": {
+          "dependencies": [
+            "npm:rxjs@^7.8.2",
+            "npm:tsup@8.5.0",
+            "npm:typescript@5.9.2",
+            "npm:zod@4"
           ]
         }
       },

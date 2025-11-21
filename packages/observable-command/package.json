@@ -1,11 +1,11 @@
 {
-    "name": "@collidor/command",
-    "version": "6.0.2",
-    "description": "A small library to create, register and execute commands.",
+    "name": "@collidor/observable-command",
+    "version": "0.0.2",
+    "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",
         "url": "git@github.com:collidor/collidor.git",
-        "directory": "packages/command"
+        "directory": "packages/collidor"
     },
     "publishConfig": {
         "access": "public"
@@ -31,11 +31,15 @@
     "author": "Alykam Burdzaki <alykam@gmail.com> (https://alykam.com)",
     "license": "MIT",
     "devDependencies": {
-        "@collidor/event": "workspace:*",
+        "rxjs": "^7.8.2",
         "tsup": "8.5.0",
-        "typescript": "5.9.2"
+        "typescript": "5.9.2",
+        "zod": "^4"
+    },
+    "dependencies": {
+        "@collidor/command": "workspace:*"
     },
     "peerDependencies": {
-        "@collidor/event": "^4.3.1"
+        "rxjs": "^7"
     }
 }
