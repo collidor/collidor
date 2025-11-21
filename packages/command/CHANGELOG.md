@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 6.0.3
+
+### Patch Changes
+
+- Add observable event
+- Updated dependencies
+  - @collidor/event@4.3.2
+
 ## 6.0.2
 
 ### Patch Changes

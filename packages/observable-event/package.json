@@ -1,23 +1,19 @@
 {
-    "name": "@collidor/event",
-    "version": "4.3.2",
-    "publishConfig": {
-        "access": "public"
-    },
-    "description": "A small library to create, register and listen to events.",
+    "name": "@collidor/observable-event",
+    "version": "0.0.3",
+    "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",
         "url": "git@github.com:collidor/collidor.git",
-        "directory": "packages/event"
+        "directory": "packages/collidor"
+    },
+    "publishConfig": {
+        "access": "public"
     },
     "type": "module",
-    "exports": {
-        ".": {
-            "types": "./dist/main.d.ts",
-            "import": "./dist/main.js",
-            "require": "./dist/main.cjs"
-        }
-    },
+    "main": "dist/main.cjs",
+    "module": "dist/main.js",
+    "types": "dist/main.d.ts",
     "scripts": {
         "build": "tsup",
         "dev": "tsup --watch",
@@ -28,17 +24,22 @@
         "sync:jsr": "deno run --allow-read --allow-write ./sync.ts"
     },
     "keywords": [
-        "event",
-        "event bus",
-        "event handler",
-        "event emitter",
-        "event listener",
-        "event publisher"
+        "command",
+        "command bus",
+        "command handler"
     ],
     "author": "Alykam Burdzaki <alykam@gmail.com> (https://alykam.com)",
     "license": "MIT",
     "devDependencies": {
-        "tsup": "^8.5.0",
-        "typescript": "^5.9.2"
+        "rxjs": "^7.8.2",
+        "tsup": "8.5.0",
+        "typescript": "5.9.2",
+        "zod": "^4"
+    },
+    "dependencies": {
+        "@collidor/event": "workspace:*"
+    },
+    "peerDependencies": {
+        "rxjs": "^7"
     }
 }

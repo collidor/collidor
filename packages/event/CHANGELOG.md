@@ -1,5 +1,11 @@
 # @collidor/event
 
+## 4.3.2
+
+### Patch Changes
+
+- Add observable event
+
 ## 4.3.1
 
 ### Patch Changes

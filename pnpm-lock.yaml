@@ -68,6 +68,25 @@ importers:
         specifier: ^4
         version: 4.1.9
 
+  packages/observable-event:
+    dependencies:
+      '@collidor/event':
+        specifier: workspace:*
+        version: link:../event
+    devDependencies:
+      rxjs:
+        specifier: ^7.8.2
+        version: 7.8.2
+      tsup:
+        specifier: 8.5.0
+        version: 8.5.0(@swc/core@1.13.5)(typescript@5.9.2)
+      typescript:
+        specifier: 5.9.2
+        version: 5.9.2
+      zod:
+        specifier: ^4
+        version: 4.1.9
+
   packages/result:
     devDependencies:
       tsup:
@@ -104,6 +123,12 @@ importers:
       '@collidor/injector':
         specifier: workspace:*
         version: link:../injector
+      '@collidor/observable-command':
+        specifier: workspace:*
+        version: link:../observable-command
+      '@collidor/observable-event':
+        specifier: workspace:*
+        version: link:../observable-event
       '@collidor/result':
         specifier: workspace:*
         version: link:../result

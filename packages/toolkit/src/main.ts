@@ -59,6 +59,7 @@ import {
 } from "@collidor/result";
 
 import { ObservableCommandBus } from "@collidor/observable-command";
+import { type EventData, ObservableEventBus } from "@collidor/observable-event";
 
 export {
   type Channel,
@@ -76,6 +77,7 @@ export {
   type ErrorLike,
   Event,
   EventBus,
+  type EventData,
   type EventHandler,
   httpClientPlugin,
   httpServerPlugin,
@@ -84,6 +86,7 @@ export {
   type MessagePortLike,
   type None,
   ObservableCommandBus,
+  ObservableEventBus,
   type Ok,
   type PluginHandler,
   PortChannel,

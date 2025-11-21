@@ -1,5 +1,17 @@
 # @collidor/command
 
+## 0.0.14
+
+### Patch Changes
+
+- Add observable event
+- Updated dependencies
+  - @collidor/observable-command@0.0.3
+  - @collidor/event@4.3.2
+  - @collidor/command@6.0.3
+  - @collidor/observable-event@0.0.3
+  - @collidor/schema-command@0.1.2
+
 ## 0.0.13
 
 ### Patch Changes

@@ -198,7 +198,7 @@ Deno.test("ObservableCommandBus - should support RxJS operators (e.g. takeUntil 
   assertEquals(results, [0, 1, 2, 3, 4]);
 });
 
-Deno.test("ObservableCommandBus - mixing with AbortSignal (if supported by underlying bus)", async () => {
+Deno.test("ObservableCommandBus - mixing with AbortSignal (if supported by underlying bus)", () => {
   // This tests if the adapter correctly wires the AbortSignal from the underlying bus
   // if you were to use the underlying bus directly, but here we test the Observable layer
   // ensuring it cleans up if we unsubscribe locally.
