@@ -1,5 +1,15 @@
 # @collidor/command
 
+## 0.0.15
+
+### Patch Changes
+
+- Y
+- Updated dependencies
+  - @collidor/observable-command@1.0.0
+  - @collidor/command@7.0.0
+  - @collidor/schema-command@0.1.3
+
 ## 0.0.14
 
 ### Patch Changes

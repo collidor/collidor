@@ -23,7 +23,7 @@ export type Register = <T = any, Q = any>(type: Q, instance: T) => void;
 export type Unregister = <T = any>(type: T) => void;
 
 export class Injector {
-  private instances = new Map<any, any>();
+  private instances: Map<any, any> = new Map();
   public parentInjector?: Injector;
 
   constructor(parentInjector?: Injector) {

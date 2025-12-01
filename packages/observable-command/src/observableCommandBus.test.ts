@@ -1,61 +1,14 @@
 import { assertEquals, assertRejects } from "@std/assert";
-import { assertSpyCalls, spy } from "@std/testing/mock";
-import { Observable, of, Subject, throwError, timer } from "rxjs";
+import { spy } from "@std/testing/mock";
+import { Observable, of, throwError, timer } from "rxjs";
 import { map, take } from "rxjs/operators";
-import { Command, CommandBus } from "@collidor/command";
-import { ObservableCommandBus } from "./observableCommandBus.ts"; // Assuming your file name
+import { ObservableCommandBus } from "./observableCommandBus.ts";
+import { Command } from "@collidor/command";
 
 class TestCommand extends Command<number, number> {}
-class OtherCommand extends Command<string, string> {}
-
-Deno.test("ObservableCommandBus - Shortcut Optimization", async (t) => {
-  await t.step(
-    "should use direct handler (shortcut) when registered via ObservableCommandBus",
-    async () => {
-      const internalBus = new CommandBus();
-      // Spy on the underlying bus.stream method to ensure it's NOT called
-      const streamSpy = spy(internalBus, "stream");
-
-      const bus = new ObservableCommandBus(internalBus);
-
-      bus.register(TestCommand, (cmd) => of(cmd.data * 2));
-
-      const result = await new Promise<number>((resolve) => {
-        bus.execute(new TestCommand(10)).subscribe(resolve);
-      });
-
-      assertEquals(result, 20);
-      // Crucial check: explicit registration should bypass internalBus.stream
-      assertSpyCalls(streamSpy, 0);
-    },
-  );
-
-  await t.step(
-    "should fallback to underlying bus if handler not found locally",
-    async () => {
-      const internalBus = new CommandBus();
-      const streamSpy = spy(internalBus, "stream");
-      const bus = new ObservableCommandBus(internalBus);
-
-      // Register on the UNDERLYING bus directly (simulating a plugin or external registration)
-      internalBus.registerStream(OtherCommand, (cmd, _ctx, next) => {
-        next(cmd.data + "_handled", true);
-        return () => {};
-      });
-
-      const result = await new Promise<string>((resolve) => {
-        bus.execute(new OtherCommand("test")).subscribe(resolve);
-      });
-
-      assertEquals(result, "test_handled");
-      // Crucial check: should have called internalBus.stream because local handler didn't exist
-      assertSpyCalls(streamSpy, 1);
-    },
-  );
-});
 
 Deno.test("ObservableCommandBus - should execute observable handler and emit values", async () => {
-  const bus = new ObservableCommandBus({});
+  const bus = new ObservableCommandBus();
 
   // Register a handler that returns an RxJS Observable
   bus.register(TestCommand, (command) => {
@@ -66,7 +19,7 @@ Deno.test("ObservableCommandBus - should execute observable handler and emit val
 
   const result: number[] = [];
 
-  // Execute returns an Observable
+  // execute() returns an Observable
   await new Promise<void>((resolve, reject) => {
     bus.execute(new TestCommand(10)).subscribe({
       next: (val) => result.push(val),
@@ -79,7 +32,7 @@ Deno.test("ObservableCommandBus - should execute observable handler and emit val
 });
 
 Deno.test("ObservableCommandBus - should propagate errors from Observable", async () => {
-  const bus = new ObservableCommandBus({});
+  const bus = new ObservableCommandBus();
 
   bus.register(TestCommand, () => {
     return throwError(() => new Error("RxJS Error"));
@@ -100,7 +53,7 @@ Deno.test("ObservableCommandBus - should propagate errors from Observable", asyn
 });
 
 Deno.test("ObservableCommandBus - should correctly tear down source Observable on unsubscribe", async () => {
-  const bus = new ObservableCommandBus({});
+  const bus = new ObservableCommandBus();
   const teardownSpy = spy();
 
   // 1. Register a command with a manual Observable that tracks teardown
@@ -138,7 +91,7 @@ Deno.test("ObservableCommandBus - should correctly tear down source Observable o
 });
 
 Deno.test("ObservableCommandBus - should handle Promise handlers seamlessly", async () => {
-  const bus = new ObservableCommandBus({});
+  const bus = new ObservableCommandBus();
 
   // Handler returns a Promise instead of an Observable
   bus.register(TestCommand, async (cmd) => {
@@ -159,7 +112,7 @@ Deno.test("ObservableCommandBus - should handle Promise handlers seamlessly", as
 });
 
 Deno.test("ObservableCommandBus - should handle synchronous values seamlessly", async () => {
-  const bus = new ObservableCommandBus({});
+  const bus = new ObservableCommandBus();
 
   // Handler returns a raw value
   bus.register(TestCommand, (cmd) => cmd.data + 1);
@@ -176,12 +129,12 @@ Deno.test("ObservableCommandBus - should handle synchronous values seamlessly", 
   assertEquals(result, [2]);
 });
 
-Deno.test("ObservableCommandBus - should support RxJS operators (e.g. takeUntil via signal is implicit)", async () => {
-  const bus = new ObservableCommandBus({});
+Deno.test("ObservableCommandBus - should support RxJS operators", async () => {
+  const bus = new ObservableCommandBus();
 
   // A long running command
   bus.register(TestCommand, () => {
-    return timer(0, 20).pipe(
+    return timer(0, 10).pipe(
       take(5), // Should emit 0, 1, 2, 3, 4 then complete
     );
   });
@@ -198,25 +151,60 @@ Deno.test("ObservableCommandBus - should support RxJS operators (e.g. takeUntil 
   assertEquals(results, [0, 1, 2, 3, 4]);
 });
 
-Deno.test("ObservableCommandBus - mixing with AbortSignal (if supported by underlying bus)", () => {
-  // This tests if the adapter correctly wires the AbortSignal from the underlying bus
-  // if you were to use the underlying bus directly, but here we test the Observable layer
-  // ensuring it cleans up if we unsubscribe locally.
+Deno.test("ObservableCommandBus - observe() should wrap BaseCommandBus stream", async () => {
+  const bus = new ObservableCommandBus();
 
-  const bus = new ObservableCommandBus({});
-  const subject = new Subject<number>();
+  // Use registerStream (from BaseCommandBus) for callback-based logic
+  bus.registerStream(TestCommand, (cmd, _ctx, next) => {
+    let i = 0;
+    // Emit 3 values then complete
+    const id = setInterval(() => {
+      if (i < 3) {
+        next(cmd.data + i, false);
+        i++;
+      } else {
+        next(undefined as any, true);
+        clearInterval(id);
+      }
+    }, 10);
+    return () => clearInterval(id);
+  });
 
-  bus.register(TestCommand, () => subject.asObservable());
+  const results: number[] = [];
 
-  let received = 0;
-  const sub = bus.execute(new TestCommand(0)).subscribe((v) => received = v);
+  // Use .observe() to get an Observable from the callback stream
+  await new Promise<void>((resolve, reject) => {
+    bus.observe(new TestCommand(10)).subscribe({
+      next: (v) => results.push(v),
+      error: reject,
+      complete: resolve,
+    });
+  });
 
-  subject.next(1);
-  assertEquals(received, 1);
+  assertEquals(results, [10, 11, 12]);
+});
 
+Deno.test("ObservableCommandBus - observe() should respect AbortSignal", async () => {
+  const bus = new ObservableCommandBus();
+  const teardownSpy = spy();
+
+  bus.registerStream(TestCommand, (_cmd, _ctx, next) => {
+    const id = setInterval(() => next(1, false), 10);
+    return () => {
+      clearInterval(id);
+      teardownSpy();
+    };
+  });
+
+  const ac = new AbortController();
+  const sub = bus.observe(new TestCommand(0), {}, ac.signal).subscribe();
+
+  await new Promise((r) => setTimeout(r, 50));
+
+  ac.abort(); // Trigger abort from signal
+
+  await new Promise((r) => setTimeout(r, 20));
+
+  assertEquals(teardownSpy.calls.length, 1);
   sub.unsubscribe();
-
-  // Should be ignored after unsubscribe
-  subject.next(2);
-  assertEquals(received, 1);
 });

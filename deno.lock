@@ -1,7 +1,6 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@collidor/command@5": "5.3.15",
     "jsr:@collidor/injector@2": "2.1.1",
     "jsr:@std/assert@*": "1.0.12",
     "jsr:@std/assert@1": "1.0.12",
@@ -26,9 +25,6 @@
     "npm:zod@4": "4.1.11"
   },
   "jsr": {
-    "@collidor/command@5.3.15": {
-      "integrity": "b82a7e73fdbd7993c905c3ad50fb93c48407eed3b425e3d95ebb3ad5b303aaa4"
-    },
     "@collidor/injector@2.1.1": {
       "integrity": "307738ea56eda98e1dc061c782b82bf38b11912f0fd41923718ffef73decd768"
     },
@@ -1528,7 +1524,7 @@
       },
       "packages/observable-command": {
         "dependencies": [
-          "jsr:@collidor/command@5",
+          "jsr:@collidor/command@7",
           "jsr:@std/assert@^1.0.11",
           "jsr:@std/testing@^1.0.9",
           "npm:zod@4"
@@ -1544,7 +1540,7 @@
       },
       "packages/observable-event": {
         "dependencies": [
-          "jsr:@collidor/command@5",
+          "jsr:@collidor/command@7",
           "jsr:@std/assert@^1.0.11",
           "jsr:@std/testing@^1.0.9",
           "npm:zod@4"
@@ -1572,7 +1568,7 @@
       },
       "packages/schema-command": {
         "dependencies": [
-          "jsr:@collidor/command@5",
+          "jsr:@collidor/command@7",
           "jsr:@std/assert@^1.0.11",
           "jsr:@std/testing@^1.0.9",
           "npm:zod@4"
@@ -1587,7 +1583,7 @@
       },
       "packages/toolkit": {
         "dependencies": [
-          "jsr:@collidor/command@5",
+          "jsr:@collidor/command@7",
           "jsr:@collidor/event@4",
           "jsr:@collidor/injector@2",
           "jsr:@collidor/result@0",

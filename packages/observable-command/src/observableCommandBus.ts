@@ -1,142 +1,105 @@
+import { from, Observable, type ObservableInput, type Subscriber } from "rxjs";
 import {
+  BaseCommandBus,
   type Command,
   type COMMAND_RETURN,
-  CommandBus,
-  type CommandBusOptions,
   type Type,
-} from "@collidor/command"; // Adjusted import for context
-import { from, isObservable, Observable, of } from "rxjs";
+} from "@collidor/command";
+import type { ObservableCommandBusPlugin } from "./observableCommandBus.types.ts";
 
-type ContextType = Record<string, any>;
-
-export class ObservableCommandBus<TContext extends ContextType = ContextType> {
-  protected bus: CommandBus<TContext, any>;
-  protected handlers: Map<
-    Type<Command>,
-    (
-      command: Command,
-      context: TContext,
-      meta?: Record<string, any>,
-    ) => Observable<any> | any | Promise<any>
-  > = new Map();
-
-  constructor(bus: CommandBus<TContext, any>);
-  constructor(options: CommandBusOptions<TContext, any>);
-  constructor(
-    busOroptions?: CommandBusOptions<TContext, any> | CommandBus<TContext, any>,
-  ) {
-    if (busOroptions instanceof CommandBus) {
-      this.bus = busOroptions as CommandBus<TContext, any>;
-    } else {
-      this.bus = new CommandBus(busOroptions);
-    }
-  }
-
+export class ObservableCommandBus<
+  TContext extends Record<string, any> = Record<string, any>,
+  TPlugin extends ObservableCommandBusPlugin<Command, TContext> | undefined =
+    undefined,
+> extends BaseCommandBus<TContext, TPlugin> {
+  /**
+   * Registers a handler that can return an Observable, Promise, or value.
+   */
   register<C extends Command>(
     command: Type<C>,
     handler: (
       command: C,
       context: TContext,
       meta?: Record<string, any>,
-    ) =>
-      | Observable<C[COMMAND_RETURN]>
-      | C[COMMAND_RETURN]
-      | Promise<C[COMMAND_RETURN]>,
+    ) => ObservableInput<C[COMMAND_RETURN]> | C[COMMAND_RETURN],
   ) {
-    this.handlers.set(command, handler as any);
+    this.commandConstructor.set(command.name, command);
+    this.handlers.set(command.name, handler as any);
 
-    // Use registerStream instead of registerStreamAsync
-    this.bus.registerStream(command, (cmd, context, next, meta) => {
-      const result = handler(cmd, context, meta);
-
-      // 1. Handle Observables
-      if (isObservable(result)) {
-        const subscription = result.subscribe({
-          next: (value) => {
-            // Pass data to the CommandBus callback
-            next(value, false);
-          },
-          error: (err) => {
-            // Pass error and mark as done
-            next(null as any, true, err);
-          },
-          complete: () => {
-            // Mark as done
-            next(null as any, true);
-          },
-        });
-
-        // Return the unsubscribe function for CommandBus to handle teardown
-        return () => {
-          subscription.unsubscribe();
-        };
-      }
-
-      // 2. Handle Promises
-      if (result instanceof Promise) {
-        let isCancelled = false;
-        result
-          .then((value) => {
-            if (!isCancelled) {
-              next(value, true); // Single value, then done
-            }
-          })
-          .catch((err) => {
-            if (!isCancelled) {
-              next(null as any, true, err);
-            }
-          });
-        return () => {
-          isCancelled = true;
-        };
-      }
-
-      // 3. Handle Synchronous Values
-      next(result, true);
-      return () => {};
-    });
+    if (this.plugin?.register) {
+      this.plugin.register(command);
+    }
   }
 
+  /**
+   * Executes a command and guarantees an Observable return.
+   */
   execute<C extends Command>(
     command: C,
     context?: TContext,
   ): Observable<C[COMMAND_RETURN]> {
-    const handler = this.handlers.get(command.constructor as Type<Command>);
-    if (handler) {
-      const result = handler(command, context || (this.bus as any).context);
-      if (isObservable(result)) {
-        return result;
-      } else if (result instanceof Promise) {
-        return from(result);
-      }
-      return of(result);
+    const handler = this.handlers.get(command.constructor.name);
+    const ctx = context ?? this.context;
+
+    // Plugin Interception
+    if (this.plugin?.handler) {
+      // We assume plugin handler returns Observable or we wrap it
+      const result = this.plugin.handler(command, ctx, handler as any);
+      return result instanceof Observable ? result : from(result as any);
     }
-    return new Observable((subscriber) => {
-      // We pass the AbortSignal from the new logic if needed,
-      // though RxJS handles unsubscription via the return function.
-      const unsubscribe = this.bus.stream(
+
+    if (!handler) {
+      return new Observable((obs) => {
+        obs.error(
+          new Error(`No handler registered for ${command.constructor.name}`),
+        );
+      });
+    }
+
+    // Wrap the result in RxJS 'from' to handle Promises, Observables, and values uniformly
+    // Note: 'from' expects an ObservableInput. If it's a primitive value, 'from' might fail
+    // depending on RxJS version/config. Safe bet is checking:
+    try {
+      const result = handler(command, ctx);
+      if (result instanceof Observable) return result;
+      if (result instanceof Promise) return from(result);
+      // It's a synchronous value
+      return from([result]);
+    } catch (err) {
+      return new Observable((obs) => obs.error(err));
+    }
+  }
+
+  /**
+   * observe() wraps the BaseCommandBus stream (callback-based) into an Observable
+   */
+  observe<C extends Command>(
+    command: C,
+    context?: TContext,
+    abortSignal?: AbortSignal,
+  ): Observable<C[COMMAND_RETURN]> {
+    return new Observable((subscriber: Subscriber<C[COMMAND_RETURN]>) => {
+      const unsubscribe = super.stream(
         command,
         (data, done, error) => {
           if (error) {
             subscriber.error(error);
-            return;
-          }
-          // Standard CommandBus stream behavior:
-          // The stream might emit data without being done yet.
-          if (data !== undefined && data !== null) {
-            subscriber.next(data);
-          }
-
-          if (done) {
-            subscriber.complete();
+          } else {
+            if (!done) subscriber.next(data);
+            else {
+              if (data !== undefined) subscriber.next(data);
+              subscriber.complete();
+            }
           }
         },
         context,
+        abortSignal,
       );
 
-      // Teardown logic
       return () => {
-        unsubscribe();
+        if (unsubscribe) {
+          Promise.resolve(unsubscribe).then((f) => f && f());
+        }
       };
     });
   }

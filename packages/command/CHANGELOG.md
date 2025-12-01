@@ -1,5 +1,11 @@
 # @collidor/command
 
+## 7.0.0
+
+### Major Changes
+
+- Y
+
 ## 6.0.3
 
 ### Patch Changes

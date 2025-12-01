@@ -1,6 +1,6 @@
 {
     "name": "@collidor/toolkit",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",

@@ -1,5 +1,16 @@
 # @collidor/observable-command
 
+## 1.0.0
+
+### Major Changes
+
+- Y
+
+### Patch Changes
+
+- Updated dependencies
+  - @collidor/command@7.0.0
+
 ## 0.0.3
 
 ### Patch Changes

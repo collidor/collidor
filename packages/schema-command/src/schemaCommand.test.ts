@@ -95,13 +95,15 @@ Deno.test("commandBus - should handle schemaCommand in streams", async () => {
   });
 
   const results: number[] = [];
-  const iterator = commandBus.streamAsync(
-    new NumberStreamCommand({ limit: 5 }),
-  );
-
-  for await (const num of iterator) {
-    results.push(num);
-  }
+  await new Promise((resolve) => {
+    commandBus.stream(
+      new NumberStreamCommand({ limit: 5 }),
+      (data, done) => {
+        results.push(data);
+        if (done) resolve(undefined);
+      },
+    );
+  });
 
   assertEquals(results, [0, 1, 2, 3, 4]);
 });

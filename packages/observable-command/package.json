@@ -1,6 +1,6 @@
 {
     "name": "@collidor/observable-command",
-    "version": "0.0.3",
+    "version": "1.0.0",
     "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",
