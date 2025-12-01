@@ -1,5 +1,11 @@
 # @collidor/command
 
+## 0.1.0
+
+### Minor Changes
+
+- Bump underlining commandBus split
+
 ## 0.0.15
 
 ### Patch Changes
