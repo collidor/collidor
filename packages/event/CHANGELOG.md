@@ -1,5 +1,11 @@
 # @collidor/event
 
+## 4.3.3
+
+### Patch Changes
+
+- fix imports
+
 ## 4.3.2
 
 ### Patch Changes

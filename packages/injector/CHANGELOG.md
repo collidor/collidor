@@ -1,5 +1,11 @@
 # @collidor/injector
 
+## 2.4.17
+
+### Patch Changes
+
+- fix imports
+
 ## 2.4.16
 
 ### Patch Changes

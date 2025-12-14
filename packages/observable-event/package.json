@@ -1,6 +1,6 @@
 {
     "name": "@collidor/observable-event",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",

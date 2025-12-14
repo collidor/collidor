@@ -5,6 +5,8 @@
     "private": true,
     "main": "index.js",
     "scripts": {
+        "dev": "pnpm turbo run dev",
+        "build": "pnpm turbo run build",
         "bump": "pnpm changeset && pnpm changeset version && pnpm turbo run sync:jsr",
         "ci:publish": "pnpm turbo run publish:jsr && pnpm publish -r --access public"
     },
@@ -17,5 +19,10 @@
     },
     "dependencies": {
         "@changesets/cli": "^2.29.7"
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "esbuild"
+        ]
     }
 }

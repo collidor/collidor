@@ -1,5 +1,19 @@
 # @collidor/command
 
+## 0.1.1
+
+### Patch Changes
+
+- fix imports
+- Updated dependencies
+  - @collidor/command@7.0.1
+  - @collidor/event@4.3.3
+  - @collidor/injector@2.4.17
+  - @collidor/observable-command@1.0.1
+  - @collidor/observable-event@0.0.4
+  - @collidor/result@0.0.3
+  - @collidor/schema-command@0.1.4
+
 ## 0.1.0
 
 ### Minor Changes

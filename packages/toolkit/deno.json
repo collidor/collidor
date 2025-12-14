@@ -1,6 +1,6 @@
 {
     "name": "@collidor/toolkit",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "license": "MIT",
     "exports": "./src/main.ts",
     "compilerOptions": {
@@ -30,11 +30,13 @@
     "imports": {
         "@std/assert": "jsr:@std/assert@^1.0.11",
         "@std/testing": "jsr:@std/testing@^1.0.9",
-        "@collidor/event": "jsr:@collidor/event@^4",
-        "@collidor/command": "jsr:@collidor/command@^7",
-        "@collidor/injector": "jsr:@collidor/injector@^2",
-        "@collidor/schema-command": "jsr:@collidor/schema-command@^0",
-        "@collidor/result": "jsr:@collidor/result@^0"
+        "@collidor/event": "jsr:@collidor/event@^4.3.3",
+        "@collidor/command": "jsr:@collidor/command@^7.0.1",
+        "@collidor/injector": "jsr:@collidor/injector@^2.4.17",
+        "@collidor/schema-command": "jsr:@collidor/schema-command@^0.1.4",
+        "@collidor/result": "jsr:@collidor/result@^0.0.3",
+        "@collidor/observable-command": "jsr:@collidor/observable-command@^1.0.1",
+        "@collidor/observable-event": "jsr:@collidor/observable-event@^0.0.4"
     },
     "lint": {
         "rules": {

@@ -6,7 +6,7 @@ const packageJson = JSON.parse(packageJsonText);
 
 denoJson.version = packageJson.version;
 
-await Promise.all([
+await Promise.all(
   Object.keys(denoJson.imports).map(async (key) => {
     if (key.startsWith("@collidor/")) {
       const pkgName = key.replace("@collidor/", "");
@@ -17,6 +17,6 @@ await Promise.all([
       denoJson.imports[key] = `jsr:${key}@^${pkgPackageJson.version}`;
     }
   }),
-]);
+);
 
 await Deno.writeTextFile("deno.json", JSON.stringify(denoJson, null, 4));

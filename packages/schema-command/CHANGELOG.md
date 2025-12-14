@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 0.1.4
+
+### Patch Changes
+
+- fix imports
+- Updated dependencies
+  - @collidor/command@7.0.1
+
 ## 0.1.3
 
 ### Patch Changes

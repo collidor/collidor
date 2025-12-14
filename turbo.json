@@ -4,6 +4,9 @@
         "**/.env.*local"
     ],
     "tasks": {
+        "dev": {
+            "dependsOn": []
+        },
         "build": {
             "dependsOn": [
                 "test",

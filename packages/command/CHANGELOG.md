@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 7.0.1
+
+### Patch Changes
+
+- fix imports
+- Updated dependencies
+  - @collidor/event@4.3.3
+
 ## 7.0.0
 
 ### Major Changes
