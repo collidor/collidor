@@ -1480,6 +1480,22 @@
       ]
     },
     "members": {
+      "docs": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@sveltejs/adapter-auto@7",
+            "npm:@sveltejs/adapter-static@^3.0.10",
+            "npm:@sveltejs/kit@^2.48.5",
+            "npm:@sveltejs/vite-plugin-svelte@^6.2.1",
+            "npm:@tailwindcss/vite@^4.1.17",
+            "npm:svelte-check@^4.3.4",
+            "npm:svelte@^5.43.8",
+            "npm:tailwindcss@^4.1.17",
+            "npm:typescript@^5.9.3",
+            "npm:vite@^7.2.2"
+          ]
+        }
+      },
       "packages/command": {
         "dependencies": [
           "jsr:@collidor/event@^4.3.3",

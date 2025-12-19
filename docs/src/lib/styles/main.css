@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --glass-surface: rgb(255 255 255 / 13%);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.4);
+  --glow-orange: 0 0 20px rgba(249, 115, 22, 0.4);
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+}
+
+:host,
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #f1f5f9;
+  font-family: "Inter", sans-serif;
+  color: var(--text-dark);
+}

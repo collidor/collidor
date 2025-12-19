@@ -9,9 +9,11 @@
         ]
     },
     "workspace": [
-        "./packages/*"
+        "./packages/*",
+        "docs"
     ],
     "unstable": [
+        "fmt-component",
         "sloppy-imports"
     ]
 }
