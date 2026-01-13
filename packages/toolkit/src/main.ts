@@ -29,6 +29,11 @@ import {
 } from "@collidor/event";
 
 import {
+  AsyncCommandBus,
+  type AsyncCommandBusPlugin,
+  type AsyncPluginHandler,
+  BaseCommandBus,
+  type BasePlugin,
   Command,
   COMMAND_RETURN,
   CommandBus,
@@ -62,6 +67,11 @@ import { ObservableCommandBus } from "@collidor/observable-command";
 import { type EventData, ObservableEventBus } from "@collidor/observable-event";
 
 export {
+  AsyncCommandBus,
+  type AsyncCommandBusPlugin,
+  type AsyncPluginHandler,
+  BaseCommandBus,
+  type BasePlugin,
   type Channel,
   type ChannelEvent,
   type Clonable,

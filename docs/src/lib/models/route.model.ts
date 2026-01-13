@@ -3,5 +3,6 @@ export type Route = {
   link: string;
   title: string;
   icon?: string;
+  order: number;
   active?: boolean;
 };

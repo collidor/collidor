@@ -1,5 +1,11 @@
 # @collidor/command
 
+## 0.1.3
+
+### Patch Changes
+
+- Export async commandbus
+
 ## 0.1.1
 
 ### Patch Changes

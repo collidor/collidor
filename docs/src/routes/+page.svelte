@@ -12,26 +12,65 @@
   {/snippet}
   <div class="max-w-5xl relative z-10">
     <TextBlock>
-      Collidor is a group of tools focused in providing type safe command and
-      event busses, and extensions to them that:
+      At it's core Collidor is mainly two things: an Command Bus and an Event
+      Bus implementations focused on type safety, performance and usability.
     </TextBlock>
-    <ul class="list-disc pl-6 text-slate-600">
-      <li class="py-2">
-        Facilitate propagation and enable remote command handling (RCP) in
-        different Browser contexts, like iframes, Web Workers and different tabs
-        under the same domain.
-      </li>
-      <li class="py-2">Enable HTTP command execution from client to server</li>
-    </ul>
-    <Divider title="Primary Modules" />
     <PrismModule
-      title="Sync Bus"
+      title="Event Bus"
       icon="cpu"
+      link="/event"
     >
       <p
         class="text-slate-600 text-sm font-medium leading-relaxed font-sans"
       >
-        Direct mapping execution pipeline. Zero latency.
+        Dependency free, type safe and easy to use command implementation
+      </p>
+    </PrismModule>
+    <PrismModule
+      title="Command Bus"
+      icon="cpu"
+      link="/command"
+    >
+      <p
+        class="text-slate-600 text-sm font-medium leading-relaxed font-sans"
+      >
+        Dependency free, type safe and easy to use command implementation
+      </p>
+    </PrismModule>
+    <PrismModule
+      title="Async Command Bus"
+      icon="wifi"
+      link="/command"
+    >
+      <p
+        class="text-slate-600 text-sm font-medium leading-relaxed font-sans"
+      >
+        Promise based command handling.
+      </p>
+    </PrismModule>
+    <PrismModule
+      title="Observable Command Bus"
+      icon="wifi"
+      link="/command"
+    >
+      <p
+        class="text-slate-600 text-sm font-medium leading-relaxed font-sans"
+      >
+        RXJS based command handling.
+      </p>
+    </PrismModule>
+    <TextBlock>
+      On top of that, many plugins and extensions were built:
+    </TextBlock>
+    <Divider title="Primary Modules" />
+    <PrismModule
+      title="PortChannel Plugin"
+      link="/command"
+    >
+      <p
+        class="text-slate-600 text-sm font-medium leading-relaxed font-sans"
+      >
+        RXJS based command handling.
       </p>
     </PrismModule>
     <PrismModule

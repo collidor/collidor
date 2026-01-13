@@ -94,7 +94,6 @@
       stroke-linecap="round"
       stroke-linejoin="round"
       data-lucide="wifi"
-      class="lucide lucide-wifi w-5 h-5 mr-3 z-10 transition-colors text-slate-400 group-hover:text-slate-600"
     >
       <path d="M12 20h.01"></path>
       <path d="M2 8.82a15 15 0 0 1 20 0"></path>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vite-project</title>
+    <link rel="stylesheet" href="./src/index.css" />
+    <script type="module" src="/src/index.ts"></script>
+</head>
+
+<body>
+    <node-graph id="graph">
+        <node-box id="c1" x="100" y="100" data-type="constant">
+            <div class="node-header text-sky-400">Val 1</div>
+            <div class="node-content"><input type="number" value="10" class="ui-input"></div>
+            <div class="ports-grid"><node-port-out id="cp1">Out</node-port-out></div>
+        </node-box>
+        <node-box id="exp1" x="380" y="100" data-type="logic">
+            <div class="node-header text-indigo-400">Processor</div>
+            <div class="node-content"><input type="text" value="a * 2" class="ui-input code-input"></div>
+            <div class="ports-grid">
+                <node-port-in id="ep1">a</node-port-in>
+                <node-port-out id="ep2">Out</node-port-out>
+            </div>
+        </node-box>
+        <node-edge from="cp1" to="ep1"></node-edge>
+    </node-graph>
+</body>
+
+</html>
