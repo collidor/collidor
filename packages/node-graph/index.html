@@ -11,22 +11,16 @@
 </head>
 
 <body>
-    <node-graph id="graph">
-        <node-box id="c1" x="100" y="100" data-type="constant">
-            <div class="node-header text-sky-400">Val 1</div>
-            <div class="node-content"><input type="number" value="10" class="ui-input"></div>
-            <div class="ports-grid"><node-port-out id="cp1">Out</node-port-out></div>
-        </node-box>
-        <node-box id="exp1" x="380" y="100" data-type="logic">
-            <div class="node-header text-indigo-400">Processor</div>
-            <div class="node-content"><input type="text" value="a * 2" class="ui-input code-input"></div>
-            <div class="ports-grid">
-                <node-port-in id="ep1">a</node-port-in>
-                <node-port-out id="ep2">Out</node-port-out>
-            </div>
-        </node-box>
-        <node-edge from="cp1" to="ep1"></node-edge>
-    </node-graph>
+    <div class="app-container">
+        <header>
+            <button onclick="spawnNode('clock')">Add Clock</button>
+            <button onclick="spawnNode('math')">Add Math (+5)</button>
+            <button onclick="spawnNode('display')">Add Display</button>
+        </header>
+
+        <node-graph id="graph" snapEnabled="false">
+        </node-graph>
+    </div>
 </body>
 
 </html>

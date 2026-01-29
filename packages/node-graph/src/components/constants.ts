@@ -18,32 +18,39 @@ export const classList = {
   isInteracting: "is-interacting",
 } as const;
 
+export type Point = {
+  x: number;
+  y: number;
+};
+
+export type Offset = {
+  dx: number;
+  dy: number;
+  w: number;
+  h: number;
+};
+
 export type NodeGraphType = HTMLElement & {
   [NODE_GRAPH]: true;
-  zoomLevel: number;
-  panPos: { x: number; y: number };
-  snapEnabled: boolean;
-  gridSize: number;
-  handleConnectionStart(port: HTMLElement | null): void;
-  clearSelection(): void;
+
+  getPortValue(id: string): unknown;
+  rebuildAdjacency(): void;
+  setPortValue(id: string, value: unknown): void;
+  updateState(): void;
+  getPortCenter(port: NodePortBaseType): Point;
 };
 
 export type NodePortBaseType = HTMLElement & {
   [NODE_PORT]: true;
-  value: unknown;
-  getCenter(): Point;
 };
 export type NodeEdgeType = HTMLElement & {
   [NODE_EDGE]: true;
+  lastPulse: number;
 };
 export type NodeBoxType = HTMLElement & {
   [NODE_BOX]: true;
   x: number;
   y: number;
-  selected: boolean;
+  update(): void;
+  lastRenderedValue: unknown;
 };
-
-export interface Point {
-  x: number;
-  y: number;
-}

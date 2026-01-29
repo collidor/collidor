@@ -1,38 +1,190 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --accent: #38bdf8;
+  --bg: #020617;
+  --panel: #1e293b;
+  --border: #334155;
+  --text: #f8fafc;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui;
+  height: 100vh;
+  overflow: hidden;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  position: fixed;
+  width: 100%;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
+.ui-input {
+  background: #0f172a;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: 14px;
+  padding: 8px;
+  border-radius: 6px;
+  outline: none;
+  font-family: monospace;
+}
+
+/* Node Styling - Grid Layout */
+node-box {
+  position: absolute;
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: white;
+  min-width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  user-select: none;
+  touch-action: none;
+  will-change: transform;
+  contain: layout style;
+}
+
+.label {
+  text-align: center;
+}
+
+.node-header {
+  grid-column: 1 / -1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.node-content {
+  grid-column: 1 / -1;
+}
+
+.ports-grid {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  padding: 4px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+node-box.is-selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+  z-index: 20;
+}
+node-box.dragging {
+  opacity: 0.8;
+  z-index: 100;
+  transition: none;
+}
+
+/* Port Elements */
+node-port-in,
+node-port-out {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 11px;
+  position: relative;
+  cursor: crosshair;
+  color: #94a3b8;
+  touch-action: none;
+  pointer-events: auto;
+}
+
+node-port-in {
+  grid-column: 1;
+  padding-left: 32px;
+  border-right: 1px solid rgba(255, 255, 255, 0.02);
+}
+node-port-out {
+  grid-column: 2;
+  padding-right: 32px;
+  justify-content: flex-end;
+}
+
+node-port-in::after,
+node-port-out::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #94a3b8;
+  border: 2px solid var(--panel);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+}
+node-port-in::after {
+  left: -7px;
+  background: var(--accent);
+}
+node-port-out::after {
+  right: -7px;
+  background: #10b981;
+}
+
+node-port-in.valid-target::after,
+node-port-out.valid-target::after {
+  background: #fff;
+  box-shadow: 0 0 15px #fff;
+  transform: translateY(-50%) scale(1.5);
+  border-color: #fff;
+}
+
+node-edge {
+  display: contents;
+}
+node-edge > * {
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0);
+  pointer-events: none;
+  z-index: 5;
+}
+.edge-badge {
+  background: #0f172a;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+body.is-interacting {
+  cursor: grabbing !important;
+}
+body.is-connecting {
+  cursor: crosshair !important;
+}
+
+input[type="range"] {
+  height: 6px;
+  -webkit-appearance: none;
+  background: #334155;
+  border-radius: 5px;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #1e293b;
+  background: var(--accent);
+}
+.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
 }

@@ -94,3 +94,36 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+node-box {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  min-width: 150px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.node-header {
+  padding: 8px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid #334155;
+}
+
+.ports-grid {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+/* Specific node themes */
+[data-type="clock"] {
+  border-top: 3px solid #f43f5e;
+}
+[data-type="math"] {
+  border-top: 3px solid #6366f1;
+}
+[data-type="display"] {
+  border-top: 3px solid #10b981;
+}
