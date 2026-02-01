@@ -1,14 +1,32 @@
 {
     "name": "@collidor/axon",
-    "private": true,
-    "version": "0.0.0",
+    "version": "0.0.1",
+    "publishConfig": {
+        "access": "public"
+    },
+    "description": "Web component library for node graphs",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:collidor/collidor.git",
+        "directory": "packages/axon"
+    },
     "type": "module",
+    "exports": {
+        ".": {
+            "types": "./dist/axon.d.ts",
+            "import": "./dist/axon.js",
+            "require": "./dist/axo.umd.cjs"
+        },
+        "./style.css": "./dist/axon.css"
+    },
     "scripts": {
-        "dev": "vite"
+        "dev": "vite",
+        "build": "vite build"
     },
     "devDependencies": {
         "typescript": "~5.9.3",
-        "vite": "^7.2.4"
+        "vite": "^7.2.4",
+        "vite-plugin-dts": "^4.5.4"
     },
     "dependencies": {
         "lit-element": "^4.2.2"

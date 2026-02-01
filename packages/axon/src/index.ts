@@ -1,3 +1,4 @@
+import "./components/node-graph.css";
 import { nodeRegistry } from "./nodes/nodeRegistry.ts";
 import type { NodeGraph } from "./components/nodeGraph.component.ts";
 

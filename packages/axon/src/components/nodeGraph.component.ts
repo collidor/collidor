@@ -9,7 +9,6 @@ import {
   TAG_NAMES,
 } from "./constants.ts";
 import { isNodeBox, isNodePort } from "./helpers.ts";
-import style from "./node-graph.css?inline";
 import { SelectionSystem } from "./selection.system.ts";
 
 /**
@@ -204,7 +203,6 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
 
   connectedCallback(): void {
     this.shadowRoot.innerHTML = /*html*/ `
-                    <style>${style}</style>
                     <div class="viewport" id="vp"><svg id="svg"></svg><div class="content"><slot></slot></div></div>
                     <div id="sel-box" class="selection-box"></div>
                 `;
