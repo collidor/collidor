@@ -1,5 +1,5 @@
 {
-    "name": "node-graph",
+    "name": "@collidor/axon",
     "private": true,
     "version": "0.0.0",
     "type": "module",
