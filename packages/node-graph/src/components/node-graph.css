@@ -1,0 +1,71 @@
+:host {
+  --ndd-background: #0f172a;
+  --ndd-background-dot: #334155;
+  --ndd-background-grid: radial-gradient(
+    var(--ndd-background-dot) 1px,
+    transparent 0
+  );
+  --ndd-background-grid-size: 20px 20px;
+
+  --ndd-edge-color: #475569;
+
+  --ndd-edge-ghost-color: #38bdf8;
+  --ndd-edge-ghost-opacity: 0.6;
+  --ndd-edge-ghost-dasharray: 4;
+
+  --ndd-selection-box-border-color: #3b82f6;
+  --ndd-selection-box-background: rgba(59, 130, 246, 0.15);
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--ndd-background);
+  background-image: var(--ndd-background-grid);
+  background-size: var(--ndd-background-grid-size);
+  touch-action: none;
+  position: relative;
+}
+
+.viewport {
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 0;
+  will-change: transform;
+  position: absolute;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10000px;
+  height: 10000px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 5;
+}
+
+path {
+  fill: none;
+  stroke: var(--ndd-edge-color);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.ghost {
+  stroke: var(--ndd-edge-ghost-color);
+  stroke-dasharray: var(--ndd-edge-ghost-dasharray);
+  opacity: var(--ndd-edge-ghost-opacity);
+  pointer-events: none;
+}
+
+.selection-box {
+  position: absolute;
+  border: 1px solid var(--ndd-selection-box-border-color);
+  background: var(--ndd-selection-box-background);
+  pointer-events: none;
+  z-index: 1000;
+  display: none;
+}

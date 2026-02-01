@@ -13,8 +13,8 @@ document.addEventListener("node-data-change", (e) => {
   const { inputs, graph } = (e as CustomEvent).detail;
   const type = node.dataset.type;
 
-  if (type && nodeRegistry[type] && nodeRegistry[type].script) {
-    nodeRegistry[type].script(node, graph, inputs);
+  if (type && nodeRegistry[type] && nodeRegistry[type].onUpdate) {
+    nodeRegistry[type].onUpdate(node, graph, inputs);
   }
 });
 
@@ -29,8 +29,8 @@ window.spawnNode = (type: string) => {
   if (type && nodeRegistry[type] && nodeRegistry[type].template) {
     node.innerHTML = nodeRegistry[type].template(id);
     graph.appendChild(node);
-    if (nodeRegistry[type].script) {
-      nodeRegistry[type].script(node, graph, {});
+    if (nodeRegistry[type].onMount) {
+      nodeRegistry[type].onMount(node, graph);
     }
   }
 };

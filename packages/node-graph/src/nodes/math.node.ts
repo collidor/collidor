@@ -1,9 +1,10 @@
-import type { NodeGraph } from "../../components/nodeGraph.component.ts";
+import type { NodeGraph } from "../components/nodeGraph.component.ts";
+import { baseNode } from "./base.node.ts";
 
 export const mathNode = {
   name: "Math",
   category: "Processor",
-  script: (
+  onUpdate: (
     node: HTMLElement,
     graph: NodeGraph,
     inputs: Record<string, unknown>,
@@ -15,14 +16,15 @@ export const mathNode = {
     const outPort = node.querySelector("node-port-out");
     graph.setPortValue(outPort.id, val);
   },
-  template: (id: string) => `
-    <div slot="header" class="text-indigo-400">Processor</div>
-    <div class="content">
+  template: (id: string) =>
+    baseNode(
+      /*html*/ `<div class="text-indigo-400">Processor</div>`,
+      /*html*/ `<div class="content">
         <div class="label">Result: <span class="val">0</span></div>
-    </div>
-    <div slot="ports" class="ports-grid">
+    </div>`,
+      /*html*/ `
         <node-port-in id="${id}_in">Input</node-port-in>
         <node-port-out id="${id}_out">Output</node-port-out>
-    </div>
-  `,
+    `,
+    ),
 };

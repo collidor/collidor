@@ -35,18 +35,6 @@ export class NodeBox extends HTMLElement implements NodeBoxType {
         border-radius: 8px;
         border: 1px solid #334155;
     }
-
-    .header {
-        padding: 8px;
-        font-size: 10px;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-
-    .ports-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
   `;
 
   connectedCallback() {
@@ -57,9 +45,7 @@ export class NodeBox extends HTMLElement implements NodeBoxType {
     if (!this.shadowRoot) {
       this.attachShadow({ mode: "open" }).innerHTML = /*html*/ `
         <style>${NodeBox.style}</style>
-        <div class="header"><slot name="header"></slot></div>
-        <div class="content"><slot></slot></div>
-        <div class="ports-grid"><slot name="ports"></slot></div>
+        <slot></slot>
       `;
     }
   }

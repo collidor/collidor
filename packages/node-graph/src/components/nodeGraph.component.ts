@@ -9,6 +9,8 @@ import {
   TAG_NAMES,
 } from "./constants.ts";
 import { isNodeBox, isNodePort } from "./helpers.ts";
+import style from "./node-graph.css?inline";
+import { SelectionSystem } from "./selection.system.ts";
 
 /**
  * OPTIMIZED NODE GRAPH ENGINE
@@ -18,7 +20,8 @@ import { isNodeBox, isNodePort } from "./helpers.ts";
 export class NodeGraph extends HTMLElement implements NodeGraphType {
   [NODE_GRAPH] = true as const;
 
-  #selectedIds: Set<string> = new Set();
+  #selectionSystem = new SelectionSystem();
+
   #portValues: Map<string, unknown> = new Map();
   #portOffsets: Map<string, Offset> = new Map();
   #adjacencyMap: Map<string, Set<string>> = new Map();
@@ -38,23 +41,37 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
   #connStartPort: NodePortBaseType | null = null;
   #hoveredPort: NodePortBaseType | null = null;
 
+  #snapEnabled = false;
+
   zoomLevel = 1;
   panPos: Point = { x: 0, y: 0 };
-  #snapEnabled = false;
+
   boxSelectMode = true;
   edgeMap = new Map<NodeEdgeType, SVGGElement>();
+  classNames = {};
 
   static get observedAttributes(): string[] {
-    return ["snapenabled"];
+    return ["snapenabled", "is-selected-class"];
   }
+
+  attributeChange: Record<string, (value: string) => void> = {
+    snapenabled: (value: string) => {
+      this.snapEnabled = value !== "false";
+    },
+    "is-selected-class": (value: string) => {
+      this.#selectionSystem.classNames.isSelected = value;
+    },
+  };
 
   attributeChangedCallback(
     name: string,
     oldValue: string,
     newValue: string,
   ): void {
-    if (name === "snapenabled") {
-      this.snapEnabled = newValue !== "false";
+    if (oldValue === newValue) return;
+
+    if (this.attributeChange[name]) {
+      this.attributeChange[name](newValue);
     }
   }
 
@@ -187,14 +204,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
 
   connectedCallback(): void {
     this.shadowRoot.innerHTML = /*html*/ `
-                    <style>
-                        :host { display: block; width: 100%; height: 100%; overflow: hidden; background:#0f172a; background-image: radial-gradient(#334155 1px, transparent 0); background-size: 20px 20px; touch-action: none; position: relative; }
-                        .viewport { width: 100%; height: 100%; transform-origin: 0 0; will-change: transform; position: absolute; }
-                        svg { position: absolute; top: 0; left: 0; width: 10000px; height: 10000px; overflow: visible; pointer-events: none; z-index: 5; }
-                        path { fill: none; stroke: #475569; stroke-width: 2px; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-                        .ghost { stroke: #38bdf8; stroke-dasharray: 4; opacity: 0.6; pointer-events: none; }
-                        .selection-box { position: absolute; border: 1px solid #3b82f6; background: rgba(59, 130, 246, 0.15); pointer-events: none; z-index: 1000; display: none; }
-                    </style>
+                    <style>${style}</style>
                     <div class="viewport" id="vp"><svg id="svg"></svg><div class="content"><slot></slot></div></div>
                     <div id="sel-box" class="selection-box"></div>
                 `;
@@ -266,6 +276,9 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
         "node-port-in, node-port-out",
       );
       if (!target || !isNodePort(target)) {
+        if (this.#hoveredPort) {
+          this.#hoveredPort.classList.remove("valid-target");
+        }
         this.#hoveredPort = null;
         return;
       }
@@ -340,9 +353,9 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
     if (node && isNodeBox(node)) {
       e.stopPropagation();
       if (!e.shiftKey && !node.classList.contains("is-selected")) {
-        this.clearSelection();
+        this.#selectionSystem.clearSelection();
       }
-      this.selectNode(node.id, true);
+      this.#selectionSystem.selectNode(node.id, true);
       this.#handleNodeDrag(e);
       return;
     }
@@ -352,7 +365,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
   }
 
   #handleNodeDrag(e: PointerEvent) {
-    const selectedNodes = this.getSelectedNodes();
+    const selectedNodes = this.#selectionSystem.getSelectedNodes();
     selectedNodes.forEach((n) => n.classList.add("dragging"));
     document.body.classList.add("is-interacting");
     const zoom = this.zoomLevel, snap = 20;
@@ -390,7 +403,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
     let moved = false;
 
     if (isSel) {
-      if (!e.shiftKey) this.clearSelection();
+      if (!e.shiftKey) this.#selectionSystem.clearSelection();
       this.selBox.style.display = "block";
     } else document.body.classList.add("is-interacting");
 
@@ -410,7 +423,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
         const bR = this.selBox.getBoundingClientRect();
         this.querySelectorAll("node-box").forEach((n) => {
           const nr = n.getBoundingClientRect();
-          this.selectNode(
+          this.#selectionSystem.selectNode(
             n.id,
             !(nr.right < bR.left || nr.left > bR.right || nr.bottom < bR.top ||
               nr.top > bR.bottom),
@@ -424,7 +437,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
     };
 
     const up = (): void => {
-      if (!moved && !isSel) this.clearSelection();
+      if (!moved && !isSel) this.#selectionSystem.clearSelection();
       this.selBox.style.display = "none";
       document.body.classList.remove("is-interacting");
       window.removeEventListener("pointermove", move);
@@ -434,32 +447,6 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
 
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
-  }
-
-  selectNode(id: string, isSelected: boolean): void {
-    const node = document.getElementById(id);
-    if (isSelected) {
-      this.#selectedIds.add(id);
-      node?.classList.add("is-selected");
-    } else {
-      this.#selectedIds.delete(id);
-      node?.classList.remove("is-selected");
-    }
-  }
-
-  clearSelection() {
-    this.#selectedIds.forEach((id) =>
-      document.getElementById(id)?.classList.remove("is-selected")
-    );
-    this.#selectedIds.clear();
-  }
-
-  getSelectedNodes(): NodeBoxType[] {
-    return Array.from(this.#selectedIds).reduce((acc, id) => {
-      const node = document.getElementById(id);
-      if (node && isNodeBox(node)) acc.push(node);
-      return acc;
-    }, [] as NodeBoxType[]);
   }
 
   draw() {
