@@ -1,15 +1,14 @@
-import "./components/node-graph.css";
 import { nodeRegistry } from "./nodes/nodeRegistry.ts";
-import type { NodeGraph } from "./components/nodeGraph.component.ts";
+import type { AxonGraph } from "./lib/axon/components/axonGraph.component.ts";
 
-export * from "./components/nodeBox.component.ts";
-export * from "./components/nodeGraph.component.ts";
-export * from "./components/nodePort.component.ts";
-export * from "./components/nodeEdge.component.ts";
-export * from "./components/constants.ts";
+export * from "./lib/axon/components/axonBox.component.ts";
+export * from "./lib/axon/components/axonGraph.component.ts";
+export * from "./lib/axon/components/axonPort.component.ts";
+export * from "./lib/axon/components/axonEdge.component.ts";
+export * from "./lib/axon/components/constants.ts";
 export * from "./events/nodeMove.event.ts";
 
-document.addEventListener("node-data-change", (e) => {
+document.addEventListener("axon-data-change", (e) => {
   const node = e.target as HTMLElement;
   const { inputs, graph } = (e as CustomEvent).detail;
   const type = node.dataset.type;
@@ -21,9 +20,9 @@ document.addEventListener("node-data-change", (e) => {
 
 // Helper to spawn nodes dynamically
 window.spawnNode = (type: string) => {
-  const graph = document.querySelector("node-graph") as NodeGraph;
+  const graph = document.querySelector("axon-graph") as NodeGraph;
   const id = "n_" + Math.random().toString(36).substr(2, 5);
-  const node = document.createElement("node-box");
+  const node = document.createElement("axon-box");
   node.id = id;
   node.dataset.type = type;
 

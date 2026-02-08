@@ -1,23 +1,24 @@
 import {
-  NODE_GRAPH,
-  type NodeBoxType,
-  type NodeEdgeType,
-  type NodeGraphType,
-  type NodePortBaseType,
+  AXON_GRAPH,
+  type AxonBoxType,
+  type AxonEdgeType,
+  type AxonGraphType,
+  type AxonPortBaseType,
   type Offset,
   type Point,
   TAG_NAMES,
 } from "./constants.ts";
-import { isNodeBox, isNodePort } from "./helpers.ts";
+import { isAxonBox, isAxonPort } from "./helpers.ts";
 import { SelectionSystem } from "./selection.system.ts";
+import style from "./axon.css?inline";
 
 /**
  * OPTIMIZED NODE GRAPH ENGINE
  * Focus: 60FPS performance, zero layout thrashing, and memory efficiency.
  * Features: Spatial indexing, port position caching, and comprehensive error handling.
  */
-export class NodeGraph extends HTMLElement implements NodeGraphType {
-  [NODE_GRAPH] = true as const;
+export class AxonGraph extends HTMLElement implements AxonGraphType {
+  [AXON_GRAPH] = true as const;
 
   #selectionSystem = new SelectionSystem();
 
@@ -37,8 +38,8 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
   // Interaction State
   #ghostPos: Point | null = null;
   #isConnecting = false;
-  #connStartPort: NodePortBaseType | null = null;
-  #hoveredPort: NodePortBaseType | null = null;
+  #connStartPort: AxonPortBaseType | null = null;
+  #hoveredPort: AxonPortBaseType | null = null;
 
   #snapEnabled = false;
 
@@ -46,8 +47,10 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
   panPos: Point = { x: 0, y: 0 };
 
   boxSelectMode = true;
-  edgeMap = new Map<NodeEdgeType, SVGGElement>();
-  classNames = {};
+  edgeMap = new Map<AxonEdgeType, SVGGElement>();
+  classNames = {
+    isInteracting: "is-interacting",
+  };
 
   static get observedAttributes(): string[] {
     return ["snapenabled", "is-selected-class"];
@@ -96,6 +99,10 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
     if (Object.is(existing, value) && typeof value !== "object") return;
 
     this.#portValues.set(id, value);
+    const port = document.getElementById(id);
+    if (port && isAxonPort(port, "in")) {
+      port.onValueUpdate?.(value);
+    }
 
     // --- PULSE TRIGGER: Move this outside the microtask ---
     const targets = this.#adjacencyMap.get(id);
@@ -103,7 +110,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
       targets.forEach((toId) => {
         // Find the edge connecting these two
         const edge = this.querySelector(
-          `node-edge[from="${id}"][to="${toId}"]`,
+          `${TAG_NAMES.AXON_EDGE}[from="${id}"][to="${toId}"]`,
         ) as any;
         if (edge) {
           edge.lastPulse = performance.now(); // Set immediately for the draw loop
@@ -116,9 +123,11 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
     // --- NOTIFICATION: Keep this in the microtask for batching ---
     this.#microtaskQueue.then(() => {
       const port = document.getElementById(id);
-      if (port && port.tagName === "NODE-PORT-IN") {
-        const node = port.closest("node-box");
-        if (node) this.#pendingNotifications.add(node as HTMLElement);
+      if (port && isAxonPort(port, "in")) {
+        const node = port.closest(TAG_NAMES.AXON_BOX);
+        if (node && isAxonBox(node)) {
+          this.#pendingNotifications.add(node as HTMLElement);
+        }
       }
       this.#flushNotifications();
       this.updateState();
@@ -130,12 +139,12 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
 
     this.#pendingNotifications.forEach((node) => {
       const inputs: Record<string, unknown> = {};
-      node.querySelectorAll("node-port-in").forEach((p) => {
+      node.querySelectorAll(TAG_NAMES.AXON_PORT_IN).forEach((p) => {
         inputs[p.id] = this.#portValues.get(p.id);
       });
 
       node.dispatchEvent(
-        new CustomEvent("node-data-change", {
+        new CustomEvent("axon-data-change", {
           bubbles: true,
           composed: true,
           detail: { inputs, graph: this },
@@ -158,7 +167,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
 
   rebuildAdjacency(): void {
     this.#adjacencyMap.clear();
-    this.querySelectorAll("node-edge").forEach((edge) => {
+    this.querySelectorAll(TAG_NAMES.AXON_EDGE).forEach((edge) => {
       const from = edge.getAttribute("from");
       const to = edge.getAttribute("to");
 
@@ -175,34 +184,35 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
     });
   }
 
-  getPortCenter(port: NodePortBaseType): Point {
-    const node = port.closest("node-box");
-    if (!node || !isNodeBox(node)) {
+  getPortCenter(port: AxonPortBaseType): Point {
+    const box = port.closest(TAG_NAMES.AXON_BOX);
+    if (!box || !isAxonBox(box)) {
       return { x: 0, y: 0 };
     }
 
     let offset = this.#portOffsets.get(port.id);
     if (!offset) {
       const portRect = port.getBoundingClientRect();
-      const nodeRect = node.getBoundingClientRect();
+      const boxRect = box.getBoundingClientRect();
       offset = {
-        dx: (portRect.left - nodeRect.left) / this.zoomLevel,
-        dy: (portRect.top - nodeRect.top) / this.zoomLevel,
+        dx: (portRect.left - boxRect.left) / this.zoomLevel,
+        dy: (portRect.top - boxRect.top) / this.zoomLevel,
         w: portRect.width / this.zoomLevel,
         h: portRect.height / this.zoomLevel,
       };
       this.#portOffsets.set(port.id, offset);
     }
 
-    const isInput = port.tagName === "NODE-PORT-IN";
+    const isInput = isAxonPort(port, "in");
     return {
-      x: node.x + offset.dx + (isInput ? 0 : offset.w),
-      y: node.y + offset.dy + (offset.h / 2),
+      x: box.x + offset.dx + (isInput ? 0 : offset.w),
+      y: box.y + offset.dy + (offset.h / 2),
     };
   }
 
   connectedCallback(): void {
     this.shadowRoot.innerHTML = /*html*/ `
+                    <style>${style}</style>
                     <div class="viewport" id="vp"><svg id="svg"></svg><div class="content"><slot></slot></div></div>
                     <div id="sel-box" class="selection-box"></div>
                 `;
@@ -258,7 +268,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
     });
   }
 
-  handleConnectionStart(port: NodePortBaseType): void {
+  handleConnectionStart(port: AxonPortBaseType): void {
     this.#connStartPort = port;
     this.#isConnecting = true;
     document.body.classList.add("is-connecting");
@@ -271,9 +281,9 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
         y: (e.clientY - rect.top - this.panPos.y) / this.zoomLevel,
       };
       const target = document.elementFromPoint(e.clientX, e.clientY)?.closest(
-        "node-port-in, node-port-out",
+        `${TAG_NAMES.AXON_PORT_IN}, ${TAG_NAMES.AXON_PORT_OUT}`,
       );
-      if (!target || !isNodePort(target)) {
+      if (!target || !isAxonPort(target)) {
         if (this.#hoveredPort) {
           this.#hoveredPort.classList.remove("valid-target");
         }
@@ -282,10 +292,12 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
       }
 
       this.#hoveredPort = (target && target !== this.#connStartPort &&
-          target.tagName !== this.#connStartPort.tagName)
+          target.tagName !== this.#connStartPort.tagName &&
+          this.#connStartPort.box !== target.box)
         ? target
         : null;
-      if (target) target.classList.add("valid-target");
+
+      if (this.#hoveredPort) this.#hoveredPort.classList.add("valid-target");
     };
 
     const onUp = () => {
@@ -297,13 +309,17 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
         const to = this.#connStartPort.tagName.includes("IN")
           ? this.#connStartPort
           : this.#hoveredPort;
-        this.querySelector(`node-edge[to="${to.id}"]`)?.remove();
-        const edge = document.createElement("node-edge");
+        this.querySelector(`${TAG_NAMES.AXON_EDGE}[to="${to.id}"]`)?.remove();
+        const edge = document.createElement(TAG_NAMES.AXON_EDGE);
         edge.setAttribute("from", from.id);
         edge.setAttribute("to", to.id);
         this.appendChild(edge);
         this.rebuildAdjacency();
         this.setPortValue(to.id, this.getPortValue(from.id));
+        from.onConnected();
+        to.onConnected();
+        this.#hoveredPort.classList.remove("valid-target");
+        this.#hoveredPort = null;
       }
       this.#isConnecting = false;
       this.#connStartPort = null;
@@ -323,22 +339,28 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
   #handlePointerDown(e: PointerEvent): void {
     if (!e.target) return;
     const port = (e.target as HTMLElement).closest(
-      "node-port-in, node-port-out",
+      `${TAG_NAMES.AXON_PORT_IN}, ${TAG_NAMES.AXON_PORT_OUT}`,
     );
 
-    if (port && isNodePort(port)) {
+    if (port && isAxonPort(port)) {
       e.stopPropagation();
-      if (port.tagName === "NODE-PORT-IN") {
-        const existing = this.querySelector(`node-edge[to="${port.id}"]`);
+      if (isAxonPort(port, "in")) {
+        const existing = this.querySelector(
+          `${TAG_NAMES.AXON_EDGE}[to="${port.id}"]`,
+        );
         if (existing) {
           const fromId = existing.getAttribute("from");
           existing.remove();
           this.rebuildAdjacency();
           this.setPortValue(port.id, undefined);
+          port.onDisconnected();
+
           const fromElement = document.getElementById(fromId || "");
-          if (!fromElement || !isNodePort(fromElement)) {
+          if (!fromElement || !isAxonPort(fromElement)) {
             return;
           }
+
+          fromElement.onDisconnected();
           this.handleConnectionStart(fromElement);
           return;
         }
@@ -347,8 +369,8 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
       return;
     }
 
-    const node = (e.target as HTMLElement).closest("node-box");
-    if (node && isNodeBox(node)) {
+    const node = (e.target as HTMLElement).closest(TAG_NAMES.AXON_BOX);
+    if (node && isAxonBox(node)) {
       e.stopPropagation();
       if (!e.shiftKey && !node.classList.contains("is-selected")) {
         this.#selectionSystem.clearSelection();
@@ -369,6 +391,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
     const zoom = this.zoomLevel, snap = 20;
     const startM = { x: e.clientX, y: e.clientY },
       startP = selectedNodes.map((n) => ({ n, x: n.x, y: n.y }));
+
     const move = (me: PointerEvent) => {
       const dx = (me.clientX - startM.x) / zoom,
         dy = (me.clientY - startM.y) / zoom;
@@ -384,7 +407,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
     };
     const up = () => {
       selectedNodes.forEach((n) => n.classList.remove("dragging"));
-      document.body.classList.remove("is-interacting");
+      document.body.classList.remove(this.classNames.isInteracting);
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerup", up);
     };
@@ -419,7 +442,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
           height: h + "px",
         });
         const bR = this.selBox.getBoundingClientRect();
-        this.querySelectorAll("node-box").forEach((n) => {
+        this.querySelectorAll(TAG_NAMES.AXON_BOX).forEach((n) => {
           const nr = n.getBoundingClientRect();
           this.#selectionSystem.selectNode(
             n.id,
@@ -450,8 +473,8 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
   draw() {
     if (!this.svg) return;
     const edges = Array.from(
-      this.querySelectorAll("node-edge"),
-    ) as NodeEdgeType[];
+      this.querySelectorAll(TAG_NAMES.AXON_EDGE),
+    ) as AxonEdgeType[];
     const edgeIds = new Set(edges);
 
     for (const [el, g] of this.edgeMap) {
@@ -471,7 +494,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
     };
 
     for (let i = 0; i < edges.length; i++) {
-      const edge = edges[i] as NodeEdgeType;
+      const edge = edges[i] as AxonEdgeType;
       const fromAttr = edge.getAttribute("from");
       const toAttr = edge.getAttribute("to");
       if (!fromAttr || !toAttr) continue;
@@ -479,7 +502,7 @@ export class NodeGraph extends HTMLElement implements NodeGraphType {
       const from = document.getElementById(fromAttr);
       const to = document.getElementById(toAttr);
 
-      if (!from || !to || !isNodePort(from) || !isNodePort(to)) continue;
+      if (!from || !to || !isAxonPort(from) || !isAxonPort(to)) continue;
 
       const s = this.getPortCenter(from), e = this.getPortCenter(to);
 
@@ -600,4 +623,4 @@ function getBezierPoint(
       t ** 3 * p3.y,
   };
 }
-customElements.define(TAG_NAMES.NODE_GRAPH, NodeGraph);
+customElements.define(TAG_NAMES.AXON_GRAPH, AxonGraph);

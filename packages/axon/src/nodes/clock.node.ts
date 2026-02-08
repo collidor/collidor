@@ -28,8 +28,8 @@ export class ClockNode extends HTMLElement {
 
     // 2. Setup the External Ports (Light DOM)
     // This allows the NodeGraph engine to find the port via querySelector
-    if (!this.querySelector("node-port-out")) {
-      const port = document.createElement("node-port-out");
+    if (!this.querySelector("axon-port-out")) {
+      const port = document.createElement("axon-port-out");
       port.id = this.portOutId;
       port.setAttribute("slot", "ports");
       port.textContent = "Tick";
@@ -54,7 +54,7 @@ export class ClockNode extends HTMLElement {
 
   private startClock() {
     this.stopClock();
-    const graph = this.closest("node-graph") as any;
+    const graph = this.closest("axon-graph") as any;
     const input = this.shadowRoot?.querySelector("input") as HTMLInputElement;
     if (!graph || !input) return;
 

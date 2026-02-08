@@ -10,10 +10,10 @@ export const mathNode = {
     inputs: Record<string, unknown>,
   ) => {
     const val = (Object.values(inputs)[0] || 0) as number + 5;
-    node.querySelector(".val").textContent = val.toString();
+    document.querySelector(".val").textContent = val.toString();
 
     // Push result to the output port
-    const outPort = node.querySelector("node-port-out");
+    const outPort = document.getElementById(`${node.id}_out`);
     graph.setPortValue(outPort.id, val);
   },
   template: (id: string) =>
@@ -23,8 +23,8 @@ export const mathNode = {
         <div class="label">Result: <span class="val">0</span></div>
     </div>`,
       /*html*/ `
-        <node-port-in id="${id}_in">Input</node-port-in>
-        <node-port-out id="${id}_out">Output</node-port-out>
+        <axon-port-in id="${id}_in">Input</axon-port-in>
+        <axon-port-out id="${id}_out">Output</axon-port-out>
     `,
     ),
 };

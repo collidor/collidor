@@ -1,5 +1,5 @@
-import type { NodeBoxType } from "./constants.ts";
-import { isNodeBox } from "./helpers.ts";
+import type { AxonBoxType } from "./constants.ts";
+import { isAxonBox } from "./helpers.ts";
 
 export class SelectionSystem {
   #selectedIds: Set<string> = new Set();
@@ -25,11 +25,11 @@ export class SelectionSystem {
     this.#selectedIds.clear();
   }
 
-  getSelectedNodes(): NodeBoxType[] {
+  getSelectedNodes(): AxonBoxType[] {
     return Array.from(this.#selectedIds).reduce((acc, id) => {
       const node = document.getElementById(id);
-      if (node && isNodeBox(node)) acc.push(node);
+      if (node && isAxonBox(node)) acc.push(node);
       return acc;
-    }, [] as NodeBoxType[]);
+    }, [] as AxonBoxType[]);
   }
 }

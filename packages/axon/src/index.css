@@ -5,6 +5,12 @@
   --border: #334155;
   --text: #f8fafc;
 }
+
+div#app {
+  width: 100vw;
+  height: 100vh;
+}
+
 body {
   background-color: var(--bg);
   color: var(--text);
@@ -28,7 +34,7 @@ body {
 }
 
 /* Node Styling - Grid Layout */
-node-box {
+axon-box {
   position: absolute;
   display: grid;
   grid-template-columns: minmax(90px, 1fr);
@@ -46,7 +52,6 @@ node-box {
 }
 
 .header {
-  padding: 8px;
   font-size: 10px;
   font-weight: bold;
   text-transform: uppercase;
@@ -56,7 +61,7 @@ node-box {
   text-align: center;
 }
 
-.node-header {
+.axon-header {
   grid-column: 1 / -1;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   background: rgba(255, 255, 255, 0.02);
@@ -66,7 +71,7 @@ node-box {
   text-transform: uppercase;
 }
 
-.node-content {
+.axon-content {
   grid-column: 1 / -1;
 }
 
@@ -78,24 +83,23 @@ node-box {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-node-box.is-selected {
+axon-box.is-selected {
   border-color: var(--accent);
   box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
   z-index: 20;
 }
-node-box.dragging {
+axon-box.dragging {
   opacity: 0.8;
   z-index: 100;
   transition: none;
 }
 
 /* Port Elements */
-node-port-in,
-node-port-out {
+axon-port-in,
+axon-port-out {
   display: flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 16px;
   font-size: 11px;
   position: relative;
   cursor: crosshair;
@@ -104,19 +108,20 @@ node-port-out {
   pointer-events: auto;
 }
 
-node-port-in {
+axon-port-in {
+  --port-color: var(--accent);
   grid-column: 1;
-  padding-left: 32px;
-  border-right: 1px solid rgba(255, 255, 255, 0.02);
+  padding-left: 16px;
 }
-node-port-out {
+axon-port-out {
+  --port-color: #10b981;
   grid-column: 2;
-  padding-right: 32px;
+  padding-right: 16px;
   justify-content: flex-end;
 }
 
-node-port-in::after,
-node-port-out::after {
+axon-port-in::after,
+axon-port-out::after {
   content: "";
   position: absolute;
   width: 14px;
@@ -130,27 +135,27 @@ node-port-out::after {
   pointer-events: none;
   transition: all 0.1s ease-out;
 }
-node-port-in::after {
+axon-port-in::after {
   left: -7px;
-  background: var(--accent);
+  background: var(--port-color);
 }
-node-port-out::after {
+axon-port-out::after {
   right: -7px;
-  background: #10b981;
+  background: var(--port-color);
 }
 
-node-port-in.valid-target::after,
-node-port-out.valid-target::after {
+axon-port-in.valid-target::after,
+axon-port-out.valid-target::after {
   background: #fff;
   box-shadow: 0 0 15px #fff;
   transform: translateY(-50%) scale(1.2);
   border-color: #fff;
 }
 
-node-edge {
+axon-edge {
   display: contents;
 }
-node-edge > * {
+axon-edge > * {
   position: absolute;
   transform: translate3d(-50%, -50%, 0);
   pointer-events: none;

@@ -26,7 +26,7 @@ export const displayNode = {
       /*html*/ `<div>Display</div>`,
       /*html*/ ` <div class="p-4 text-2xl font-bold val">0</div>`,
       /*html*/ `
-      <node-port-in id="${id}_in">In</node-port-in><div></div>
+      <axon-port-in id="${id}_in">In</axon-port-in><div></div>
     `,
     ),
 };
