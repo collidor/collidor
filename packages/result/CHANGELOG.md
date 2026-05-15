@@ -1,5 +1,11 @@
 # @collidor/command
 
+## 0.0.4
+
+### Patch Changes
+
+- add extra features to Result
+
 ## 0.0.3
 
 ### Patch Changes

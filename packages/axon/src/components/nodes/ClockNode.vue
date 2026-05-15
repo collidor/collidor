@@ -1,12 +1,17 @@
 <script lang="ts" module>
-let clockId = 0;
-export function generateClockId() {
-  return `clock-${clockId++}`;
-}
+export const clockId = (() => {
+  let id = 0;
+  return function () {
+    return `clock-${id++}`;
+  };
+})();
 
-export function getPortId(id: string) {
-  return `${id}-out-0`;
-}
+export const getPortId = (() => {
+  let id = 0;
+  return function (nodeId: string) {
+    return `${nodeId}-out-${id++}`;
+  };
+})();
 </script>
 
 <script lang="ts" setup>
@@ -17,15 +22,20 @@ import {
   onUnmounted,
   ref,
   type ShallowRef,
+  useTemplateRef,
 } from "vue";
-import type { AxonGraphType } from "../../lib/axon/components/constants";
+import type {
+  AxonGraphType,
+  AxonPortBaseType,
+  AxonPortOutType,
+} from "../../lib/axon/components/constants";
 import PortGrid from "../partials/PortGrid.vue";
 import PortValue from "../partials/PortValue.vue";
 import NodeBase from "../partials/NodeBase.vue";
 const hzValue = ref(30);
 const open = ref(true);
 
-const { id = generateClockId(), hz = 30, min = 1, max = 60 } = defineProps<{
+const { id = clockId(), hz = 30, min = 1, max = 60 } = defineProps<{
   id?: string;
   hz?: number;
   min?: number;
@@ -49,14 +59,14 @@ effect(() => {
   }
 });
 
-const graph = inject("graphRef") as ShallowRef<AxonGraphType | null>;
+const portOut = ref<AxonPortOutType>();
 
 function startClock() {
   stopClock();
 
   intervalId.value = setInterval(() => {
     const now = Date.now();
-    graph.value?.setPortValue(portOutId, now);
+    portOut.value?.setValue(now);
   }, 1000 / hzValue.value);
 }
 
@@ -76,7 +86,7 @@ onUnmounted(() => {
 <template>
   <NodeBase :id="id">
     <template v-slot:header>
-      <h3>SYSTEM CLOCK {{ id }}</h3>
+      <h3>System Clock</h3>
     </template>
     <PortGrid>
       <PortValue
@@ -99,7 +109,16 @@ onUnmounted(() => {
           <span>Hz</span>
         </div>
       </PortValue>
-      <PortValue :id="portOutId" direction="output" dataType="number">
+      <PortValue
+        :ref="
+          (ref: any) => {
+            portOut = ref.portRef;
+          }
+        "
+        :id="portOutId"
+        direction="output"
+        dataType="number"
+      >
       </PortValue>
     </PortGrid>
   </NodeBase>

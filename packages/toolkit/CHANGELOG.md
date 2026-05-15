@@ -1,5 +1,13 @@
 # @collidor/command
 
+## 0.1.4
+
+### Patch Changes
+
+- add extra features to Result
+- Updated dependencies
+  - @collidor/result@0.0.4
+
 ## 0.1.3
 
 ### Patch Changes

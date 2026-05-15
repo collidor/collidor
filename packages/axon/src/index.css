@@ -51,12 +51,6 @@ axon-box {
   contain: layout style;
 }
 
-.header {
-  font-size: 10px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
 .label {
   text-align: center;
 }
@@ -200,4 +194,8 @@ input[type="range"]::-webkit-slider-thumb {
   width: 100vw;
   height: 100vh;
   flex-direction: column;
+}
+
+h3 {
+  margin: 4px 8px;
 }

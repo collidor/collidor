@@ -57,7 +57,16 @@ export type AxonPortBaseType = HTMLElement & {
   onConnected(): void;
   onDisconnected(): void;
   onValueUpdate?(value: unknown): void;
+  setValue?(value: unknown): void;
 };
+
+export type AxonPortInType = AxonPortBaseType & {
+  onValueUpdate(value: unknown): void;
+};
+export type AxonPortOutType = AxonPortBaseType & {
+  setValue(value: unknown): void;
+};
+
 export type AxonEdgeType = HTMLElement & {
   [AXON_EDGE]: true;
   lastPulse: number;

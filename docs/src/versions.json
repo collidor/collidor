@@ -1,11 +1,11 @@
 {
+    "axon": "0.0.1",
     "command": "7.0.1",
     "event": "4.3.3",
     "injector": "2.4.17",
-    "node-graph": "0.0.1",
     "observable-command": "1.0.1",
     "observable-event": "0.0.4",
-    "result": "0.0.3",
+    "result": "0.0.4",
     "schema-command": "0.1.4",
-    "toolkit": "0.1.3"
+    "toolkit": "0.1.4"
 }

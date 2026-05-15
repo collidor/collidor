@@ -18,7 +18,6 @@ const { id = generateId() } = defineProps<{
     <div class="header">
       <slot name="header"></slot>
     </div>
-    {{ id }}
     <div class="content">
       <slot></slot>
     </div>
@@ -51,7 +50,6 @@ const { id = generateId() } = defineProps<{
   color: #38bdf8; /* Blue accent for display */
   font-size: 10px;
   font-weight: bold;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 </style>

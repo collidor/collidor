@@ -1498,6 +1498,27 @@
           ]
         }
       },
+      "packages/axon": {
+        "dependencies": [
+          "jsr:@std/assert@1",
+          "jsr:@std/testing@1"
+        ],
+        "packageJson": {
+          "dependencies": [
+            "npm:@microsoft/api-extractor@^7.56.0",
+            "npm:@vitejs/plugin-vue-jsx@^5.1.1",
+            "npm:@vitejs/plugin-vue@^6.0.1",
+            "npm:@vitest/eslint-plugin@^1.4.3",
+            "npm:lit-element@^4.2.2",
+            "npm:typescript@~5.9.3",
+            "npm:unplugin-dts@1.0.0-beta.6",
+            "npm:vite-plugin-dts@^4.5.4",
+            "npm:vite-plugin-vue-devtools@^8.0.5",
+            "npm:vite@^7.2.4",
+            "npm:vue@^3.5.27"
+          ]
+        }
+      },
       "packages/command": {
         "dependencies": [
           "jsr:@collidor/event@^4.3.3",
@@ -1533,19 +1554,6 @@
             "npm:@swc/core@^1.13.5",
             "npm:tsup@^8.5.0",
             "npm:typescript@^5.9.2"
-          ]
-        }
-      },
-      "packages/node-graph": {
-        "dependencies": [
-          "jsr:@std/assert@1",
-          "jsr:@std/testing@1"
-        ],
-        "packageJson": {
-          "dependencies": [
-            "npm:lit-element@^4.2.2",
-            "npm:typescript@~5.9.3",
-            "npm:vite@^7.2.4"
           ]
         }
       },
@@ -1615,7 +1623,7 @@
           "jsr:@collidor/injector@^2.4.17",
           "jsr:@collidor/observable-command@^1.0.1",
           "jsr:@collidor/observable-event@^0.0.4",
-          "jsr:@collidor/result@^0.0.3",
+          "jsr:@collidor/result@^0.0.4",
           "jsr:@collidor/schema-command@~0.1.4",
           "jsr:@std/assert@^1.0.11",
           "jsr:@std/testing@^1.0.9"

@@ -11,7 +11,9 @@ const colors = {
 
 <script lang="ts" setup>
 import type { PortDataType } from "../../lib/axon/components/constants";
-import { computed, ref } from "vue";
+import { computed, ref, useTemplateRef } from "vue";
+
+const portRef = useTemplateRef("port");
 
 const { id, direction = "input", dataType = "number" } = defineProps<{
   id: string;
@@ -40,6 +42,10 @@ const onDisconnected = () => {
 const tag = computed(() => {
   return direction === "input" ? "axon-port-in" : "axon-port-out";
 });
+
+defineExpose({
+  portRef,
+});
 </script>
 
 <template>
@@ -48,6 +54,7 @@ const tag = computed(() => {
     :id="id"
     :style='{ "--port-color": colors[dataType] }'
     class="port"
+    ref="port"
     @port-connected="onConnected"
     @port-disconnected="onDisconnected"
     @value-update='emit("update", $event.detail)'

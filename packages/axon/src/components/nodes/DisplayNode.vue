@@ -1,8 +1,10 @@
 <script lang="ts" module>
-let displayId = 0;
-export function generateDisplayId() {
-  return `display-${displayId++}`;
-}
+export const generateId = (() => {
+  let id = 0;
+  return function () {
+    return `display-${id++}`;
+  };
+})();
 </script>
 
 <script lang="ts" setup>
@@ -10,7 +12,7 @@ import { ref } from "vue";
 import PortValue from "../partials/PortValue.vue";
 import NodeBase from "../partials/NodeBase.vue";
 
-const { id = generateDisplayId() } = defineProps<{
+const { id = generateId() } = defineProps<{
   id?: string;
 }>();
 
@@ -33,7 +35,6 @@ function handleUpdate(val: any) {
         @update="handleUpdate"
       >
       </PortValue>
-      {{ id }}
       <h3>Data Monitor</h3>
     </template>
     <div class="display-container">

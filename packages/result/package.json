@@ -1,11 +1,11 @@
 {
     "name": "@collidor/result",
-    "version": "0.0.3",
-    "description": "An umbrella package for collidor libraries.",
+    "version": "0.0.4",
+    "description": "A lightweight, type-safe Result pattern implementation for robust error handling.",
     "repository": {
         "type": "git",
         "url": "git@github.com:collidor/collidor.git",
-        "directory": "packages/collidor"
+        "directory": "packages/result"
     },
     "publishConfig": {
         "access": "public"
@@ -24,9 +24,10 @@
         "sync:jsr": "deno run --allow-read --allow-write ./sync.ts"
     },
     "keywords": [
-        "command",
-        "command bus",
-        "command handler"
+        "result",
+        "error handling",
+        "typescript",
+        "functional"
     ],
     "author": "Alykam Burdzaki <alykam@gmail.com> (https://alykam.com)",
     "license": "MIT",
