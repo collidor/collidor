@@ -1,14 +1,15 @@
 {
     "name": "@collidor/result",
-    "version": "0.0.4",
+    "version": "0.1.0",
     "description": "A lightweight, type-safe Result pattern implementation for robust error handling.",
     "repository": {
         "type": "git",
-        "url": "git@github.com:collidor/collidor.git",
+        "url": "git+https://github.com/collidor/collidor.git",
         "directory": "packages/result"
     },
     "publishConfig": {
-        "access": "public"
+        "access": "public",
+        "provenance": true
     },
     "type": "module",
     "main": "dist/main.cjs",

@@ -1,6 +1,6 @@
 {
     "name": "@collidor/toolkit",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "license": "MIT",
     "exports": "./src/main.ts",
     "compilerOptions": {
@@ -34,7 +34,7 @@
         "@collidor/command": "jsr:@collidor/command@^7.0.1",
         "@collidor/injector": "jsr:@collidor/injector@^2.4.17",
         "@collidor/schema-command": "jsr:@collidor/schema-command@^0.1.4",
-        "@collidor/result": "jsr:@collidor/result@^0.0.4",
+        "@collidor/result": "jsr:@collidor/result@^0.1.0",
         "@collidor/observable-command": "jsr:@collidor/observable-command@^1.0.1",
         "@collidor/observable-event": "jsr:@collidor/observable-event@^0.0.4"
     },

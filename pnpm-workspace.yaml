@@ -2,3 +2,6 @@ packages:
   - "docs"
   - "packages/*"
 includeWorkspaceRoot: false
+allowBuilds:
+  "@swc/core": true
+  "esbuild": true

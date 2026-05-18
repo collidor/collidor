@@ -5,7 +5,7 @@
     "injector": "2.4.17",
     "observable-command": "1.0.1",
     "observable-event": "0.0.4",
-    "result": "0.0.4",
+    "result": "0.1.0",
     "schema-command": "0.1.4",
-    "toolkit": "0.1.4"
+    "toolkit": "0.1.5"
 }

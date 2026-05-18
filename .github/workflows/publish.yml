@@ -1,47 +1,46 @@
 name: Publish
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 env:
-  CI: true
+    CI: true
 
 jobs:
-  publish:
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write # Allows changesets to push the version commit and tags
-      id-token: write # Allows npm to generate provenance information
-      pull-requests: write # Allows creating pull requests
-    steps:
-      - name: Checkout code repository
-        uses: actions/checkout@v4
+    publish:
+        timeout-minutes: 15
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write # Allows changesets to push the version commit and tags
+            id-token: write # Allows npm to generate provenance information
+            pull-requests: write # Allows creating pull requests
+        steps:
+            - name: Checkout code repository
+              uses: actions/checkout@v4
 
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
+            - uses: denoland/setup-deno@v2
+              with:
+                  deno-version: v2.x
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
 
-      - name: Setup node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "pnpm"
+            - name: Setup node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24
+                  cache: "pnpm"
 
-      - name: Install dependencies
-        run: pnpm install
+            - name: Install dependencies
+              run: pnpm install
 
-      - name: Create and publish versions
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          publish: "pnpm ci:publish"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          JSR_TOKEN: ${{ secrets.JSR_TOKEN }}
+            - name: Create and publish versions
+              id: changesets
+              uses: changesets/action@v1
+              with:
+                  publish: "pnpm ci:publish"
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+                  JSR_TOKEN: ${{ secrets.JSR_TOKEN }}

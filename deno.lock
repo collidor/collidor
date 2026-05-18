@@ -1623,7 +1623,7 @@
           "jsr:@collidor/injector@^2.4.17",
           "jsr:@collidor/observable-command@^1.0.1",
           "jsr:@collidor/observable-event@^0.0.4",
-          "jsr:@collidor/result@^0.0.4",
+          "jsr:@collidor/result@0.1",
           "jsr:@collidor/schema-command@~0.1.4",
           "jsr:@std/assert@^1.0.11",
           "jsr:@std/testing@^1.0.9"
