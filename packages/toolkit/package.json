@@ -1,6 +1,6 @@
 {
     "name": "@collidor/toolkit",
-    "version": "0.1.5",
+    "version": "0.1.7",
     "description": "An umbrella package for collidor libraries.",
     "repository": {
         "type": "git",
@@ -21,6 +21,7 @@
         "lint": "deno lint",
         "test:coverage": "deno test --coverage && deno coverage --lcov --output=./coverage/lcov.info && deno coverage --html",
         "publish:jsr": "deno run --allow-all ./publishJsr.ts",
+        "pblish:pnpm": "pnpm publish",
         "sync:jsr": "deno run --allow-read --allow-write ./sync.ts"
     },
     "keywords": [

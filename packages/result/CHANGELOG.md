@@ -1,5 +1,17 @@
 # @collidor/command
 
+## 0.1.2
+
+### Patch Changes
+
+- release result
+
+## 0.1.1
+
+### Patch Changes
+
+- fixing deployment
+
 ## 0.1.0
 
 ### Minor Changes

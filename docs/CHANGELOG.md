@@ -1,5 +1,18 @@
 # docs
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies
+  - @collidor/toolkit@0.1.7
+
+## 0.0.6
+
+### Patch Changes
+
+- @collidor/toolkit@0.1.6
+
 ## 0.0.5
 
 ### Patch Changes

@@ -292,7 +292,7 @@ Deno.test("PortChannelPlubin - should stop if unsubscribe is called", async () =
     ExampleCommand,
     (command, _context, next) => {
       let stop = false;
-      const timeouts: number[] = [];
+      const timeouts: any[] = [];
       for (let i = 0; i < command.data; i++) {
         timeouts.push(setTimeout(() => {
           if (stop) {

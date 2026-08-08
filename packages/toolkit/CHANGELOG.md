@@ -1,5 +1,20 @@
 # @collidor/command
 
+## 0.1.7
+
+### Patch Changes
+
+- release result
+- Updated dependencies
+  - @collidor/result@0.1.2
+
+## 0.1.6
+
+### Patch Changes
+
+- Updated dependencies
+  - @collidor/result@0.1.1
+
 ## 0.1.5
 
 ### Patch Changes

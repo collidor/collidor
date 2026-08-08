@@ -8,7 +8,7 @@
         "dev": "pnpm turbo run dev",
         "build": "pnpm turbo run build",
         "bump": "pnpm changeset && pnpm changeset version && pnpm turbo run sync:jsr",
-        "ci:publish": "pnpm turbo run publish:jsr && pnpm --filter \"./packages/**\" exec npm publish --access public --provenance"
+        "ci:publish": "pnpm turbo run publish:jsr && pnpm turbo run publish:pnpm"
     },
     "keywords": [],
     "author": "",
