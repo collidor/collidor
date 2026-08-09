@@ -59,19 +59,6 @@
                 "JSR_TOKEN",
                 "NPM_TOKEN"
             ]
-        },
-        "publish:pnpm": {
-            "dependsOn": [
-                "build",
-                "^publish:pnpm"
-            ],
-            "outputs": [
-                "package.json"
-            ],
-            "env": [
-                "JSR_TOKEN",
-                "NPM_TOKEN"
-            ]
         }
     }
 }
