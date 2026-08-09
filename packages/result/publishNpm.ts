@@ -20,7 +20,7 @@ if (publishedVersion === localVersion) {
 // deno-lint-ignore no-console
 console.log(`Publishing ${pkgName}@${localVersion} to npm...`);
 const publishCommand = new Deno.Command("npm", {
-  args: ["publish", "--provenance", "--access", "public"],
+  args: ["publish", "--access", "public"],
   env: Deno.env.toObject(),
   stdin: "inherit",
   stdout: "inherit",
