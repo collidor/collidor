@@ -21,7 +21,7 @@
         "lint": "deno lint",
         "test:coverage": "deno test --coverage && deno coverage --lcov --output=./coverage/lcov.info && deno coverage --html",
         "publish:jsr": "deno run --allow-all ./publishJsr.ts",
-        "publish:pnpm": "pnpm publish",
+        "publish:pnpm": "npm publish --access public",
         "sync:jsr": "deno run --allow-read --allow-write ./sync.ts"
     },
     "keywords": [
