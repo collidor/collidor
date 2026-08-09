@@ -21,6 +21,7 @@ if (publishedVersion === localVersion) {
 console.log(`Publishing ${pkgName}@${localVersion} to npm...`);
 const publishCommand = new Deno.Command("npm", {
   args: ["publish", "--access", "public"],
+  env: Deno.env.toObject(),
   stdin: "inherit",
   stdout: "inherit",
   stderr: "inherit",
