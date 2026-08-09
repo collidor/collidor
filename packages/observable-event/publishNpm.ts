@@ -12,10 +12,12 @@ const viewOutput = await viewCommand.output();
 const publishedVersion = new TextDecoder().decode(viewOutput.stdout).trim();
 
 if (publishedVersion === localVersion) {
+  // deno-lint-ignore no-console
   console.log(`Skipping, ${pkgName}@${localVersion} is already published to npm.`);
   Deno.exit(0);
 }
 
+// deno-lint-ignore no-console
 console.log(`Publishing ${pkgName}@${localVersion} to npm...`);
 const publishCommand = new Deno.Command("npm", {
   args: ["publish", "--access", "public"],
